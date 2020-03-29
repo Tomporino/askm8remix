@@ -14,5 +14,15 @@
             <div>{{ answer.submission_time }}</div>
         </div>
         {% endfor %}
+        <div id="user_answer">
+            <form name="question" method="post" enctype="multipart/form-data">
+                <div>Your answer:</div>
+                    <textarea name="answer_message" id="answer_form" cols="50" rows="8"></textarea>
+                <button type="submit">Submit</button>
+                <div>
+                    <input type="file" id="img" name="image" >
+                </div>
+            </form>
+        </div>
     </div>
 {% endblock %}
