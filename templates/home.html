@@ -2,4 +2,14 @@
 
 {% block content %}
     <div>Home</div>
+    <div class="questions">
+        {% for question in questions %}
+        <div id="question">
+            <div>{{ question.title }}</div>
+            <div>{{ question.view_number }}</div>
+            <div>{{ question.vote_number }}</div>
+            <div>{{ question.submission_time }}</div>
+        </div>
+        {% endfor %}
+    </div>
 {% endblock %}
