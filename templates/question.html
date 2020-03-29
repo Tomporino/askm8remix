@@ -1,0 +1,18 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    <div class="question">
+        <div>{{ question.title }}</div>
+        <div>{{ question.message }}</div>
+        <div>{{ question.submission_time }}</div>
+    </div>
+    <div>Answers:</div>
+    <div class="answers">
+        {% for answer in answers %}
+        <div id="answer">
+            <div>{{ answer.message }}</div>
+            <div>{{ answer.submission_time }}</div>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}

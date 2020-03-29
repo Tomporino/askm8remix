@@ -5,7 +5,7 @@
     <div class="questions">
         {% for question in questions %}
         <div id="question">
-            <div>{{ question.title }}</div>
+            <div><a href="{{ url_for('question', question_id=question.id) }}">{{ question.title }}</a></div>
             <div>{{ question.view_number }}</div>
             <div>{{ question.vote_number }}</div>
             <div>{{ question.submission_time }}</div>
