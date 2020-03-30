@@ -122,3 +122,11 @@ def get_comments(cursor):
         SELECT * FROM comment"""
     cursor.execute(query)
     return cursor.fetchall()
+
+@connection.connection_handler
+def update_answer(cursor, answer):
+    query = """
+        UPDATE answer
+        SET submission_time = %(submission_time)s, message = %(message)s, image = %(image)s
+        WHERE id = %(id)s"""
+    cursor.execute(query, answer)

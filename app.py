@@ -95,5 +95,24 @@ def add_comment_to_answer(answer_id):
 
     return render_template('comment.html', answer=answer, question=question)
 
+
+@app.route('/answer/<answer_id>/edit', methods=['GET', 'POST'])
+def edit_answer(answer_id):
+    answer = data_handler.get_selected_answer(answer_id)
+
+    if request.method == 'POST':
+        edited_answer = {
+            'id':answer_id,
+            'submission_time':util.get_current_time(),
+            'message':request.form['edit_answer'],
+            'image':None
+        }
+        data_handler.update_answer(edited_answer)
+        return redirect(url_for('question', question_id=answer['question_id']))
+
+    return render_template('answer.html', answer=answer)
+
+
+
 if __name__ == '__main__':
     app.run()

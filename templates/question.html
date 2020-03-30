@@ -1,6 +1,7 @@
 {% extends 'layout.html' %}
 
 {% block content %}
+
     <div class="question">
         <div>{{ question.title }}</div>
         <div>{{ question.message }}</div>
@@ -18,6 +19,7 @@
         <div id="answer">
             <div>{{ answer.message }}</div>
             <div>{{ answer.submission_time }}</div>
+            <div><a href="{{ url_for('edit_answer', answer_id=answer.id) }}"><button>Edit</button></a></div>
         <div><button onclick="location.href='/comment/{{ answer.id }}/new_comment'" type="button">Comment</button></div>
                 {% for comment in comments %}
                     {% if comment.answer_id == answer.id%}
@@ -37,4 +39,5 @@
             </form>
         </div>
     </div>
+
 {% endblock %}
