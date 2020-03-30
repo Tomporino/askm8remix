@@ -97,3 +97,28 @@ def get_ordered_data(cursor, column, direction):
              SELECT * FROM question
              ORDER BY {column} {direction}""").format(column=sql.SQL(column), direction=sql.SQL(direction)))
     return cursor.fetchall()
+
+
+@connection.connection_handler
+def add_comment(cursor, comment):
+    query = """
+        INSERT INTO comment (question_id, answer_id, message, submission_time, edited_count)
+        VALUES (%(question_id)s, %(answer_id)s, %(message)s, %(submission_time)s, %(edited_count)s)"""
+    cursor.execute(query, comment)
+
+
+@connection.connection_handler
+def get_selected_answer(cursor, answer_id):
+    query = """
+        SELECT * FROM answer
+        WHERE id = %(answer_id)s"""
+    cursor.execute(query, {'answer_id':answer_id})
+    return cursor.fetchone()
+
+
+@connection.connection_handler
+def get_comments(cursor):
+    query = """
+        SELECT * FROM comment"""
+    cursor.execute(query)
+    return cursor.fetchall()

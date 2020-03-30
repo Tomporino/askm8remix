@@ -18,7 +18,13 @@
         <div id="answer">
             <div>{{ answer.message }}</div>
             <div>{{ answer.submission_time }}</div>
-        </div>
+        <div><button onclick="location.href='/comment/{{ answer.id }}/new_comment'" type="button">Comment</button></div>
+                {% for comment in comments %}
+                    {% if comment.answer_id == answer.id%}
+                        <div>{{ comment.message }}</div>
+            </div>
+                    {% endif %}
+                {% endfor %}
         {% endfor %}
         <div id="user_answer">
             <form name="question" method="post" enctype="multipart/form-data">

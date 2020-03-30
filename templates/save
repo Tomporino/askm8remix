@@ -1,0 +1,26 @@
+<div><button onclick="location.href='/comment/{{ answer.id }}/new_comment'" type="button">Comment</button></div>
+                {% for comment in comments %}
+                    {% if comment.answer_id == answer.id%}
+                        <div>{{ comment.message }}</div>
+            </div>
+                    {% endif %}
+                {% endfor %}
+
+
+@app.route('/comment/<answer_id>/new_comment', methods=['GET', 'POST'])
+def add_comment_to_answer(answer_id):
+    answer = data_handler.get_selected_answer(answer_id)
+    print(answer['question_id'])
+
+    if request.method == 'POST':
+        answer_comment = {
+            'question_id': answer['question_id'],
+            'answer_id': answer_id,
+            'message': request.form['answer_comment'],
+            'submission_time': util.get_current_time(),
+            'edited_count': 0
+        }
+        data_handler.add_comment(answer_comment)
+        return redirect(url_for('question', question_id=answer['question_id']))
+
+    return render_template('comment.html', answer=answer, question=question)

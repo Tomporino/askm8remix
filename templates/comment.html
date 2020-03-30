@@ -1,0 +1,17 @@
+{% extends 'layout.html' %}
+{% block content %}
+
+    <div id="answer">
+                <div>{{ answer.message }}</div>
+                <div>{{ answer.submission_time }}</div>
+            </div>
+            <div id="answer_comment">
+                <h3>Your comment:</h3>
+                    <form name="answer_comment" method="post">
+                        <textarea name="answer_comment" id="comment_form" cols="50" rows="8"></textarea>
+                        <button type="submit">Submit</button>
+                    </form>
+            </div>
+
+
+{% endblock %}

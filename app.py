@@ -18,6 +18,8 @@ def home():
 
 @app.route('/question/<question_id>', methods=['POST', 'GET'])
 def question(question_id):
+    comments = data_handler.get_comments()
+
     if request.method == 'POST':
         user_answer = {
             'submission_time': util.get_current_time(),
@@ -31,7 +33,7 @@ def question(question_id):
     data_handler.view_counter(question_id)
     question = data_handler.get_selected_question(question_id)
     answers = data_handler.get_answers_for_question(question_id)
-    return render_template('question.html', question=question, answers=answers)
+    return render_template('question.html', question=question, answers=answers, comments=comments)
 
 
 @app.route('/add-question', methods=['GET', 'POST'])
@@ -75,6 +77,23 @@ def delete_question(question_id):
     data_handler.delete_question(question_id)
     return redirect('/')
 
+
+@app.route('/comment/<answer_id>/new_comment', methods=['GET', 'POST'])
+def add_comment_to_answer(answer_id):
+    answer = data_handler.get_selected_answer(answer_id)
+
+    if request.method == 'POST':
+        answer_comment = {
+            'question_id': answer['question_id'],
+            'answer_id': answer_id,
+            'message': request.form['answer_comment'],
+            'submission_time': util.get_current_time(),
+            'edited_count': 0
+        }
+        data_handler.add_comment(answer_comment)
+        return redirect(url_for('question', question_id=answer['question_id']))
+
+    return render_template('comment.html', answer=answer, question=question)
 
 if __name__ == '__main__':
     app.run()
