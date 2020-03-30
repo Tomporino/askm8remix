@@ -65,5 +65,11 @@ def edit_question(question_id):
     return render_template('edit_question.html', question=data_handler.get_selected_question(question_id))
 
 
+@app.route('/delete-question/<question_id>')
+def delete_question(question_id):
+    data_handler.delete_question(question_id)
+    return redirect('/')
+
+
 if __name__ == '__main__':
     app.run()
