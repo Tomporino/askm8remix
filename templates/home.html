@@ -1,6 +1,22 @@
 {% extends 'layout.html' %}
 
 {% block content %}
+    <div class="buttons">
+        <form action="/" method="post">
+            <select name="selector">
+                <option name="title" value="title">Title</option>
+                <option name="view_number" value="view_number">Views</option>
+                <option name="vote_number" value="vote_number">Votes</option>
+                <option name="view_number" value="view_number">Views</option>
+                <option name="submission_time" value="submission_time">Time</option>
+            </select>
+            <select name="direction">
+                <option name="ASC" value="ASC">ASC</option>
+                <option name="DESC" value="DESC">DESC</option>
+            </select>
+            <button type="submit">List</button>
+        </form>
+    </div>
     <div>Home</div>
     <div class="questions">
         {% for question in questions %}

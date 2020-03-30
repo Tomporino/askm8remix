@@ -5,9 +5,14 @@ import util
 app = Flask(__name__)
 
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def home():
-    questions = data_handler.get_questions()
+    if request.method == 'POST':
+        column = request.form['selector']
+        direction = request.form['direction']
+        questions = data_handler.get_ordered_data(column, direction)
+    else:
+        questions = data_handler.get_questions()
     return render_template('home.html', questions=questions)
 
 

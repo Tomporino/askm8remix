@@ -1,3 +1,4 @@
+from psycopg2 import sql
 import connection
 
 
@@ -88,3 +89,11 @@ def delete_question(cursor, question_id):
             WHERE id = %(id)s;
             """
     cursor.execute(query, {'id': question_id})
+
+
+@connection.connection_handler
+def get_ordered_data(cursor, column, direction):
+    cursor.execute(sql.SQL("""
+             SELECT * FROM question
+             ORDER BY {column} {direction}""").format(column=sql.SQL(column), direction=sql.SQL(direction)))
+    return cursor.fetchall()
