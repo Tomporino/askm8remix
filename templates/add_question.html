@@ -1,5 +1,12 @@
 {% extends 'layout.html' %}
 
 {% block content %}
-
+    <div class="add_question">
+        <form method="post" action="{{ url_for('add_question') }}">
+            <input name="title" placeholder="Title" type="text">
+            <textarea name="message" placeholder="Write your question here" cols="50" rows="10"></textarea>
+            <input type="file" name="image">
+            <button type="submit">Submit</button>
+        </form>
+    </div>
 {% endblock %}

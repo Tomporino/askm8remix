@@ -33,3 +33,11 @@ def add_answer(cursor, details):
             INSERT INTO answer (submission_time, vote_number, question_id, message, image)
             VALUES (%(submission_time)s, %(vote_number)s, %(question_id)s, %(message)s, %(image)s)"""
     cursor.execute(query, details)
+
+
+@connection.connection_handler
+def add_question(cursor, details):
+    query = """
+            INSERT into question (submission_time, view_number, vote_number, title, message, image)
+            VALUES (%(submission_time)s, %(view_number)s, %(vote_number)s, %(title)s, %(message)s, %(image)s)"""
+    cursor.execute(query, details)

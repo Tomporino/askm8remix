@@ -28,5 +28,21 @@ def question(question_id):
     return render_template('question.html', question=question, answers=answers)
 
 
+@app.route('/add-question', methods=['GET', 'POST'])
+def add_question():
+    if request.method == 'POST':
+        user_question = {
+            'submission_time': util.get_current_time(),
+            'view_number': 0,
+            'vote_number': 0,
+            'title': request.form['title'],
+            'message': request.form['message'],
+            'image': None
+        }
+        data_handler.add_question(user_question)
+        return redirect('/')
+    return render_template('add_question.html')
+
+
 if __name__ == '__main__':
     app.run()
