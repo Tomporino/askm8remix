@@ -130,3 +130,20 @@ def update_answer(cursor, answer):
         SET submission_time = %(submission_time)s, message = %(message)s, image = %(image)s
         WHERE id = %(id)s"""
     cursor.execute(query, answer)
+
+@connection.connection_handler
+def update_comment(cursor, comment):
+    query = """
+        UPDATE comment
+        SET message = %(message)s, submission_time=%(submission_time)s
+        WHERE id = %(id)s"""
+    cursor.execute(query, comment)
+
+
+@connection.connection_handler
+def get_comment_by_id(cursor, comment_id):
+    query = """
+        SELECT * FROM comment
+        WHERE id = %(comment_id)s"""
+    cursor.execute(query, {'comment_id':comment_id})
+    return cursor.fetchone()

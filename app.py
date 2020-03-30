@@ -102,16 +102,31 @@ def edit_answer(answer_id):
 
     if request.method == 'POST':
         edited_answer = {
-            'id':answer_id,
-            'submission_time':util.get_current_time(),
-            'message':request.form['edit_answer'],
-            'image':None
+            'id': answer_id,
+            'submission_time': util.get_current_time(),
+            'message': request.form['edit_answer'],
+            'image': None
         }
         data_handler.update_answer(edited_answer)
         return redirect(url_for('question', question_id=answer['question_id']))
 
     return render_template('answer.html', answer=answer)
 
+
+@app.route('/comment/<comment_id>/edit', methods=['GET', 'POST'])
+def edit_comment(comment_id):
+    edit = True
+    comment = data_handler.get_comment_by_id(comment_id)
+
+    if request.method == 'POST':
+        edited_comment = {
+            'id': comment_id,
+            'message': request.form['edit_comment'],
+            'submission_time': util.get_current_time()
+        }
+        data_handler.update_comment(edited_comment)
+        return redirect(url_for('question', question_id=comment['question_id']))
+    return render_template('comment.html', edit=edit, comment=comment)
 
 
 if __name__ == '__main__':

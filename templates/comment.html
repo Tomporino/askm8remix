@@ -1,7 +1,16 @@
 {% extends 'layout.html' %}
 {% block content %}
+     {% if edit  %}
+        <div id="edit_comment">
+            <form name="edit_comm_form" method="post">
+                <textarea name="edit_comment" id="edit_com" cols="50" rows="8">{{ comment.message }}</textarea>
+                <div>{{ comment.submission_time }}</div>
+                <button type="submit">Edit</button>
+            </form>
+        </div>
+    {% else %}
 
-    <div id="answer">
+    <div id="answer_comment">
                 <div>{{ answer.message }}</div>
                 <div>{{ answer.submission_time }}</div>
             </div>
@@ -12,6 +21,5 @@
                         <button type="submit">Submit</button>
                     </form>
             </div>
-
-
+   {% endif %}
 {% endblock %}

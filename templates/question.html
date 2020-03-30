@@ -24,6 +24,7 @@
                 {% for comment in comments %}
                     {% if comment.answer_id == answer.id%}
                         <div>{{ comment.message }}</div>
+                        <div><a href="{{ url_for('edit_comment', comment_id=comment.id) }}"><button>Edit</button></a></div>
             </div>
                     {% endif %}
                 {% endfor %}
