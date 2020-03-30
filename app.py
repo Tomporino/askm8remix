@@ -45,5 +45,11 @@ def add_question():
     return render_template('add_question.html')
 
 
+@app.route('/question/<question_id>/upvote')
+def upvote_question(question_id):
+    data_handler.upvote_question(question_id)
+    return redirect(url_for('question', question_id=question_id))
+
+
 if __name__ == '__main__':
     app.run()
