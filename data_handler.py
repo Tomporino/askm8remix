@@ -67,3 +67,13 @@ def upvote_question(cursor, question_id):
             WHERE id = %(question_id)s;
             """
     cursor.execute(query, {'question_id': question_id})
+
+
+@connection.connection_handler
+def edit_question(cursor, details):
+    query = """
+            UPDATE question
+            SET title = %(title)s, message = %(message)s, image = %(image)s
+            WHERE id = %(id)s
+            """
+    cursor.execute(query, details)

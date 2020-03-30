@@ -51,5 +51,19 @@ def upvote_question(question_id):
     return redirect(url_for('question', question_id=question_id))
 
 
+@app.route('/edit-question/<question_id>', methods=['GET', 'POST'])
+def edit_question(question_id):
+    if request.method == 'POST':
+        user_question = {
+            'id': question_id,
+            'title': request.form['title'],
+            'message': request.form['message'],
+            'image': None
+        }
+        data_handler.edit_question(user_question)
+        return redirect(url_for('question', question_id=question_id))
+    return render_template('edit_question.html', question=data_handler.get_selected_question(question_id))
+
+
 if __name__ == '__main__':
     app.run()

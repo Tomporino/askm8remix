@@ -7,7 +7,7 @@
         <div>{{ question.submission_time }}</div>
         <div class="question_buttons">
             <div><a href="{{ url_for('upvote_question', question_id=question.id) }}"><button>Upvote</button></a></div>
-            <div><button>Edit</button></div>
+            <div><a href="{{ url_for('edit_question', question_id=question.id) }}"><button>Edit</button></a></div>
             <div><button>Remove</button></div>
             <div></div>
         </div>
