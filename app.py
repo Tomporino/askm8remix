@@ -23,6 +23,7 @@ def question(question_id):
         }
         data_handler.add_answer(user_answer)
         return redirect(request.url)
+    data_handler.view_counter(question_id)
     question = data_handler.get_selected_question(question_id)
     answers = data_handler.get_answers_for_question(question_id)
     return render_template('question.html', question=question, answers=answers)
