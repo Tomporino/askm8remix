@@ -104,6 +104,66 @@ def get_ordered_data(cursor, column, direction):
 
 
 @connection.connection_handler
+def add_comment(cursor, comment):
+    query = """
+        INSERT INTO comment (question_id, answer_id, message, submission_time, edited_count)
+        VALUES (%(question_id)s, %(answer_id)s, %(message)s, %(submission_time)s, %(edited_count)s)"""
+    cursor.execute(query, comment)
+
+
+@connection.connection_handler
+def get_selected_answer(cursor, answer_id):
+    query = """
+        SELECT * FROM answer
+        WHERE id = %(answer_id)s"""
+    cursor.execute(query, {'answer_id':answer_id})
+    return cursor.fetchone()
+
+
+@connection.connection_handler
+def get_comments(cursor):
+    query = """
+        SELECT * FROM comment"""
+    cursor.execute(query)
+    return cursor.fetchall()
+
+
+@connection.connection_handler
+def update_answer(cursor, answer):
+    query = """
+        UPDATE answer
+        SET submission_time = %(submission_time)s, message = %(message)s, image = %(image)s
+        WHERE id = %(id)s"""
+    cursor.execute(query, answer)
+
+
+@connection.connection_handler
+def update_comment(cursor, comment):
+    query = """
+        UPDATE comment
+        SET message = %(message)s, submission_time=%(submission_time)s
+        WHERE id = %(id)s"""
+    cursor.execute(query, comment)
+
+
+@connection.connection_handler
+def get_comment_by_id(cursor, comment_id):
+    query = """
+        SELECT * FROM comment
+        WHERE id = %(comment_id)s"""
+    cursor.execute(query, {'comment_id':comment_id})
+    return cursor.fetchone()
+
+
+@connection.connection_handler
+def delete_comment(cursor, comment_id):
+    query = """
+        DELETE FROM comment
+        WHERE id = %(comment_id)s"""
+    cursor.execute(query, {'comment_id':comment_id})
+
+
+@connection.connection_handler
 def add_tag(cursor, new_tag):
     query = """
             INSERT INTO tag (name)
