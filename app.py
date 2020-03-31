@@ -129,5 +129,12 @@ def edit_comment(comment_id):
     return render_template('comment.html', edit=edit, comment=comment)
 
 
+@app.route('/comment/<comment_id>/delete')
+def delete_comment(comment_id):
+    comment = data_handler.get_comment_by_id(comment_id)
+    data_handler.delete_comment(comment_id)
+
+    return redirect(url_for('question', question_id=comment['question_id']))
+
 if __name__ == '__main__':
     app.run()
