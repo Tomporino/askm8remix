@@ -116,7 +116,7 @@ def get_selected_answer(cursor, answer_id):
     query = """
         SELECT * FROM answer
         WHERE id = %(answer_id)s"""
-    cursor.execute(query, {'answer_id':answer_id})
+    cursor.execute(query, {'answer_id': answer_id})
     return cursor.fetchone()
 
 
@@ -151,7 +151,7 @@ def get_comment_by_id(cursor, comment_id):
     query = """
         SELECT * FROM comment
         WHERE id = %(comment_id)s"""
-    cursor.execute(query, {'comment_id':comment_id})
+    cursor.execute(query, {'comment_id': comment_id})
     return cursor.fetchone()
 
 
@@ -160,7 +160,7 @@ def delete_comment(cursor, comment_id):
     query = """
         DELETE FROM comment
         WHERE id = %(comment_id)s"""
-    cursor.execute(query, {'comment_id':comment_id})
+    cursor.execute(query, {'comment_id': comment_id})
 
 
 @connection.connection_handler
@@ -207,3 +207,14 @@ def update_question_tag(cursor, question_id, tag_id):
             WHERE question_id = %(question_id)s;
             """
     cursor.execute(query, {'question_id': question_id, 'tag_id': tag_id})
+
+
+@connection.connection_handler
+def get_search_questions(cursor, search_phrase):
+    query = """
+            SELECT *
+            FROM question
+            WHERE title LIKE %(search)s 
+    """
+    cursor.execute(query, {'search': '%' + search_phrase + '%'})
+    return cursor.fetchall()
