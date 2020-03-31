@@ -45,9 +45,11 @@ def add_answer(cursor, details):
 def add_question(cursor, details):
     query = """
             INSERT INTO question (submission_time, view_number, vote_number, title, message, image)
-            VALUES (%(submission_time)s, %(view_number)s, %(vote_number)s, %(title)s, %(message)s, %(image)s);
+            VALUES (%(submission_time)s, %(view_number)s, %(vote_number)s, %(title)s, %(message)s, %(image)s)
+            RETURNING id;
             """
     cursor.execute(query, details)
+    return cursor.fetchone()
 
 
 @connection.connection_handler
@@ -85,6 +87,8 @@ def delete_question(cursor, question_id):
     query = """
             DELETE FROM answer
             WHERE question_id=%(id)s;
+            DELETE FROM question_tag
+            WHERE question_id=%(id)s;
             DELETE FROM question
             WHERE id = %(id)s;
             """
@@ -103,7 +107,7 @@ def get_ordered_data(cursor, column, direction):
 def add_tag(cursor, new_tag):
     query = """
             INSERT INTO tag (name)
-            VALUES (%(new_tag)s)
+            VALUES (%(new_tag)s);
             """
     cursor.execute(query, {'new_tag': new_tag})
 
@@ -111,7 +115,35 @@ def add_tag(cursor, new_tag):
 @connection.connection_handler
 def get_tags(cursor):
     query = """
-            SELECT * FROM tag
+            SELECT * FROM tag;
             """
     cursor.execute(query)
     return cursor.fetchall()
+
+
+@connection.connection_handler
+def get_question_tags(cursor):
+    query = """
+            SELECT * FROM question_tag;
+            """
+    cursor.execute(query)
+    return cursor.fetchall()
+
+
+@connection.connection_handler
+def set_question_tag(cursor, question_id, tag_id):
+    query = """
+            INSERT INTO question_tag (question_id, tag_id)
+            VALUES (%(question_id)s, %(tag_id)s);
+            """
+    cursor.execute(query, {'question_id': question_id, 'tag_id': tag_id})
+
+
+@connection.connection_handler
+def update_question_tag(cursor, question_id, tag_id):
+    query = """
+            UPDATE question_tag
+            SET tag_id=%(tag_id)s
+            WHERE question_id = %(question_id)s;
+            """
+    cursor.execute(query, {'question_id': question_id, 'tag_id': tag_id})

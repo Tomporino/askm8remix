@@ -4,6 +4,12 @@
     <div class="edit_page">
         <form method="post">
             <input name="title" value="{{ question.title }}">
+                <select name="tag_selector">
+                    <option name="None" value=None>None</option>
+                    {% for tag in tags %}
+                        <option name="{{ tag.name }}" value="{{ tag.id }}">{{ tag.name }}</option>
+                    {% endfor %}
+                </select>
             <textarea name="message">
                 {{ question.message }}
             </textarea>

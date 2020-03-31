@@ -46,9 +46,11 @@ def add_question():
             'message': request.form['message'],
             'image': None
         }
-        data_handler.add_question(user_question)
+        question_id = data_handler.add_question(user_question)
+        if request.form['tag_selector']:
+            data_handler.set_question_tag(question_id['id'], int(request.form['tag_selector']))
         return redirect('/')
-    return render_template('add_question.html')
+    return render_template('add_question.html', tags=data_handler.get_tags())
 
 
 @app.route('/question/<question_id>/upvote')
@@ -67,8 +69,12 @@ def edit_question(question_id):
             'image': None
         }
         data_handler.edit_question(user_question)
+        if request.form['tag_selector'] and int(question_id) not in [tag['question_id'] for tag in data_handler.get_question_tags()]:
+            data_handler.set_question_tag(question_id, int(request.form['tag_selector']))
+        else:
+            data_handler.update_question_tag(question_id, int(request.form['tag_selector']))
         return redirect(url_for('question', question_id=question_id))
-    return render_template('edit_question.html', question=data_handler.get_selected_question(question_id))
+    return render_template('edit_question.html', question=data_handler.get_selected_question(question_id), tags=data_handler.get_tags())
 
 
 @app.route('/delete-question/<question_id>')

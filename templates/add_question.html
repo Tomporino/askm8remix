@@ -6,8 +6,9 @@
             <input name="title" placeholder="Title" type="text">
             <textarea name="message" placeholder="Write your question here" cols="50" rows="10"></textarea>
             <select name="tag_selector">
+                <option name="None" value=None>None</option>
                 {% for tag in tags %}
-                    <option name="{{ tag.name }}" value="{{ tag.name }}">{{ tag.name }}</option>
+                    <option name="{{ tag.name }}" value="{{ tag.id }}">{{ tag.name }}</option>
                 {% endfor %}
             </select>
             <input type="file" name="image">
