@@ -151,5 +151,18 @@ def delete_comment(comment_id):
     return redirect(url_for('question', question_id=comment['question_id']))
 
 
+@app.route('/search', methods=['GET', 'POST'])
+def search():
+    if request.method == 'POST':
+        search_phrase = request.form['search']
+        questions = data_handler.get_search_questions(search_phrase=search_phrase)
+    else:
+        return redirect('/')
+
+    return render_template('home.html', questions=questions)
+
+
 if __name__ == '__main__':
-    app.run()
+    app.run(
+        debug=True
+    )
