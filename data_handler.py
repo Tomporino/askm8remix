@@ -44,7 +44,7 @@ def add_answer(cursor, details):
 @connection.connection_handler
 def add_question(cursor, details):
     query = """
-            INSERT into question (submission_time, view_number, vote_number, title, message, image)
+            INSERT INTO question (submission_time, view_number, vote_number, title, message, image)
             VALUES (%(submission_time)s, %(view_number)s, %(vote_number)s, %(title)s, %(message)s, %(image)s);
             """
     cursor.execute(query, details)
@@ -96,4 +96,22 @@ def get_ordered_data(cursor, column, direction):
     cursor.execute(sql.SQL("""
              SELECT * FROM question
              ORDER BY {column} {direction}""").format(column=sql.SQL(column), direction=sql.SQL(direction)))
+    return cursor.fetchall()
+
+
+@connection.connection_handler
+def add_tag(cursor, new_tag):
+    query = """
+            INSERT INTO tag (name)
+            VALUES (%(new_tag)s)
+            """
+    cursor.execute(query, {'new_tag': new_tag})
+
+
+@connection.connection_handler
+def get_tags(cursor):
+    query = """
+            SELECT * FROM tag
+            """
+    cursor.execute(query)
     return cursor.fetchall()

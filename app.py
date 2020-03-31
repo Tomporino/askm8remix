@@ -1,6 +1,7 @@
 from flask import Flask, render_template, redirect, request, url_for
 import data_handler
 import util
+import error_handling
 
 app = Flask(__name__)
 
@@ -73,6 +74,13 @@ def edit_question(question_id):
 @app.route('/delete-question/<question_id>')
 def delete_question(question_id):
     data_handler.delete_question(question_id)
+    return redirect('/')
+
+
+@app.route('/add-tag/<new_tag>')
+def add_tag(new_tag):
+    if error_handling.check_tag(new_tag, [tag['name'] for tag in data_handler.get_tags()]):
+        data_handler.add_tag(new_tag)
     return redirect('/')
 
 
