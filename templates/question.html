@@ -2,15 +2,23 @@
 
 {% block content %}
     <div class="question">
-        <div>{{ question.title }}</div>
-        <div>{{ question.message }}</div>
-        <div>{{ question.submission_time }}</div>
-        <div class="question_buttons">
-            <div><a href="{{ url_for('upvote_question', question_id=question.id) }}"><button>Upvote</button></a></div>
-            <div><a href="{{ url_for('edit_question', question_id=question.id) }}"><button>Edit</button></a></div>
-            <div><a href="{{ url_for('delete_question', question_id=question.id) }}"><button>Remove</button></a></div>
-            <div></div>
+        <div class="q_main">
+            <div><h2>{{ question.title }}</h2></div>
+            <div><p>{{ question.message }}</p></div>
+            <div class="sub_data">
+                <div><p>{{ question.submission_time.strftime('%Y-%m-%d ') }}</p></div>
+                <div><p>{{ question.view_number }}</p></div>
+                <div><p>{{ question.vote_number }}</p></div>
+                <div></div>
+            </div>
+            <div class="question_buttons">
+                <div><a href="{{ url_for('upvote_question', question_id=question.id) }}"><button>Upvote</button></a></div>
+                <div><a href="{{ url_for('edit_question', question_id=question.id) }}"><button>Edit</button></a></div>
+                <div><a href="{{ url_for('delete_question', question_id=question.id) }}"><button>Remove</button></a></div>
+                <div></div>
+            </div>
         </div>
+        <div></div>
     </div>
     <div>Answers:</div>
     <div class="answers">

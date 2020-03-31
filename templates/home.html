@@ -42,7 +42,7 @@
             <div><a href="{{ url_for('question', question_id=question.id) }}">{{ question.title }}</a></div>
             <div><p>{{ question.view_number }}</p></div>
             <div><p>{{ question.vote_number }}</p></div>
-            <div><p>{{ question.submission_time }}</p></div>
+            <div><p>{{ question.submission_time.strftime('%Y-%m-%d ') }}</p></div>
         </div>
         {% endfor %}
     </div>

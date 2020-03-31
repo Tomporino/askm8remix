@@ -57,3 +57,39 @@ body a:hover {
 #table_header h2 {
     color: #AAAAAA;
 }
+
+.question_buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 2fr;
+    padding: 10px;
+    text-align: center;
+}
+
+.question {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+}
+
+.q_main {
+    box-shadow: 0px 10px 25px 15px;
+    padding: 10px;
+}
+
+.q_main h2 {
+    font-size: 2em;
+    color: #AAAAAA;
+}
+
+.q_main p {
+    font-size: 1.5em;
+}
+
+.sub_data {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.sub_data p {
+    font-size: 0.8em;
+    color: #AAAAAA;
+}
