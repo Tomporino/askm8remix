@@ -1,30 +1,48 @@
 {% extends 'layout.html' %}
 
 {% block content %}
-    <div class="buttons">
-        <form action="/" method="post">
-            <select name="selector">
-                <option name="title" value="title">Title</option>
-                <option name="view_number" value="view_number">Views</option>
-                <option name="vote_number" value="vote_number">Votes</option>
-                <option name="view_number" value="view_number">Views</option>
-                <option name="submission_time" value="submission_time">Time</option>
-            </select>
-            <select name="direction">
-                <option name="ASC" value="ASC">ASC</option>
-                <option name="DESC" value="DESC">DESC</option>
-            </select>
-            <button type="submit">List</button>
-        </form>
+    <div class="headbar">
+        <div class="selectors">
+            <form action="/" method="post">
+                <div id="selectors">
+                    <div id="selector_button">
+                        <select name="selector">
+                            <option name="title" value="title">Title</option>
+                            <option name="view_number" value="view_number">Views</option>
+                            <option name="vote_number" value="vote_number">Votes</option>
+                            <option name="view_number" value="view_number">Views</option>
+                            <option name="submission_time" value="submission_time">Time</option>
+                        </select>
+                    </div>
+                    <div id="selector_button">
+                        <select name="direction">
+                            <option name="ASC" value="ASC">ASC</option>
+                            <option name="DESC" value="DESC">DESC</option>
+                        </select>
+                    </div>
+                    <div id="submit_button">
+                        <button type="submit">List</button>
+                    </div>
+                </div>
+            </form>
+            <div></div>
+        </div>
+        <div class="search">
+        </div>
     </div>
-    <div>Home</div>
     <div class="questions">
+        <div id="table_header">
+            <div><h2>TITLE</h2></div>
+            <div><h2>VIEWS</h2></div>
+            <div><h2>VOTES</h2></div>
+            <div><h2>DATE</h2></div>
+        </div>
         {% for question in questions %}
         <div id="question">
             <div><a href="{{ url_for('question', question_id=question.id) }}">{{ question.title }}</a></div>
-            <div>{{ question.view_number }}</div>
-            <div>{{ question.vote_number }}</div>
-            <div>{{ question.submission_time }}</div>
+            <div><p>{{ question.view_number }}</p></div>
+            <div><p>{{ question.vote_number }}</p></div>
+            <div><p>{{ question.submission_time }}</p></div>
         </div>
         {% endfor %}
     </div>

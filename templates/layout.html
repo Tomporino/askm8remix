@@ -10,8 +10,10 @@
 </head>
 <body>
     {% include 'includes/navbar.html' %}
-    {% block content %}
-    {% endblock %}
+    <div class="content_wrapper">
+        {% block content %}
+        {% endblock %}
+    </div>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
 </html>
