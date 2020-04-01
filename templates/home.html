@@ -26,6 +26,8 @@
                 </div>
             </form>
 
+            {# TODO: Add css for searchbar #}
+
             <div class="search">
                 <form action="/search" method="post">
                     <div id="search">
@@ -34,7 +36,6 @@
                     </div>
                 </form>
             </div>
-
 
         </div>
     </div>
@@ -46,12 +47,12 @@
             <div><h2>DATE</h2></div>
         </div>
         {% for question in questions %}
-        <div id="question">
-            <div><a href="{{ url_for('question', question_id=question.id) }}">{{ question.title }}</a></div>
-            <div><p>{{ question.view_number }}</p></div>
-            <div><p>{{ question.vote_number }}</p></div>
-            <div><p>{{ question.submission_time.strftime('%Y-%m-%d ') }}</p></div>
-        </div>
+            <div id="question">
+                <div><a href="{{ url_for('question', question_id=question.id) }}">{{ question.title }}</a></div>
+                <div><p>{{ question.view_number }}</p></div>
+                <div><p>{{ question.vote_number }}</p></div>
+                <div><p>{{ question.submission_time.strftime('%Y-%m-%d ') }}</p></div>
+            </div>
         {% endfor %}
     </div>
 {% endblock %}
