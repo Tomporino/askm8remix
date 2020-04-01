@@ -154,8 +154,9 @@ def delete_comment(comment_id):
 @app.route('/search', methods=['GET', 'POST'])
 def search():
     if request.method == 'POST':
-        search_phrase = request.form['search']
+        search_phrase = request.form['search'].lower()
         questions = data_handler.get_search_questions(search_phrase=search_phrase)
+        util.get_valid_questions(questions, search_phrase, 'title')
     else:
         return redirect('/')
 
