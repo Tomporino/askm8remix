@@ -1,57 +1,60 @@
 {% extends 'layout.html' %}
 
 {% block content %}
-    <div class="headbar">
-        <div class="selectors">
-            <form action="/" method="post">
-                <div id="selectors">
-                    <div id="selector_button">
-                        <select name="selector">
-                            <option name="title" value="title">Title</option>
-                            <option name="view_number" value="view_number">Views</option>
-                            <option name="vote_number" value="vote_number">Votes</option>
-                            <option name="view_number" value="view_number">Views</option>
-                            <option name="submission_time" value="submission_time">Time</option>
-                        </select>
-                    </div>
-                    <div id="selector_button">
-                        <select name="direction">
-                            <option name="ASC" value="ASC">ASC</option>
-                            <option name="DESC" value="DESC">DESC</option>
-                        </select>
-                    </div>
-                    <div id="submit_button">
-                        <button type="submit">List</button>
-                    </div>
+    <div class="home">
+        <div></div>
+        <div id="home_main">
+            <div class="headbar">
+                <div class="selectors">
+                    <div><form action="/" method="post">
+                        <div id="selectors">
+                            <div id="selector_button">
+                                <select name="selector">
+                                    <option name="title" value="title">Title</option>
+                                    <option name="view_number" value="view_number">Views</option>
+                                    <option name="vote_number" value="vote_number">Votes</option>
+                                    <option name="view_number" value="view_number">Views</option>
+                                    <option name="submission_time" value="submission_time">Time</option>
+                                </select>
+                            </div>
+                            <div id="selector_button">
+                                <select name="direction">
+                                    <option name="ASC" value="ASC">ASC</option>
+                                    <option name="DESC" value="DESC">DESC</option>
+                                </select>
+                            </div>
+                            <div id="submit_button">
+                            <button type="submit">Sort</button>
+                            </div>
+                        </div>
+                    </form></div>
                 </div>
-            </form>
-
-            <div class="search">
-                <form action="/search" method="post">
-                    <div id="search">
-                        <input name="search" type="text" placeholder="Search..." minlength="3" required>
-                        <button type="submit">Search</button>
-                    </div>
-                </form>
+                <div class="search">
+                    <form action="{{ url_for('search') }}" method="post">
+                        <div id="search">
+                            <div><input name="search" type="text" placeholder="Search..." minlength="3" required></div>
+                            <div><button type="submit">Search</button></div>
+                        </div>
+                    </form>
+                </div>
             </div>
-
-
+            <div class="questions">
+                <div id="table_header">
+                    <div><h2>TITLE</h2></div>
+                    <div><h2>VIEWS</h2></div>
+                    <div><h2>VOTES</h2></div>
+                    <div><h2>DATE</h2></div>
+                </div>
+                {% for question in questions %}
+                <div id="question">
+                <div><a href="{{ url_for('question', question_id=question.id) }}">{{ question.title }}</a></div>
+                <div><p>{{ question.view_number }}</p></div>
+                <div><p>{{ question.vote_number }}</p></div>
+                <div><p>{{ question.submission_time.strftime('%Y-%m-%d ') }}</p></div>
+                </div>
+                {% endfor %}
+            </div>
         </div>
-    </div>
-    <div class="questions">
-        <div id="table_header">
-            <div><h2>TITLE</h2></div>
-            <div><h2>VIEWS</h2></div>
-            <div><h2>VOTES</h2></div>
-            <div><h2>DATE</h2></div>
-        </div>
-        {% for question in questions %}
-        <div id="question">
-            <div><a href="{{ url_for('question', question_id=question.id) }}">{{ question.title }}</a></div>
-            <div><p>{{ question.view_number }}</p></div>
-            <div><p>{{ question.vote_number }}</p></div>
-            <div><p>{{ question.submission_time.strftime('%Y-%m-%d ') }}</p></div>
-        </div>
-        {% endfor %}
+        <div></div>
     </div>
 {% endblock %}
