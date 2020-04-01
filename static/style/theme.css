@@ -4,11 +4,11 @@ body {
 }
 
 body p {
-    color:  #F4B350;
+    color: #F4B350;
 }
 
 body a {
-    color:  #E7903C;
+    color: #E7903C;
 }
 
 body a:hover {
@@ -100,7 +100,7 @@ body a:hover {
     border-radius: 5px;
 }
 
-h3, h2{
+h3, h2 {
     color: #AAAAAA;
 }
 
@@ -124,7 +124,7 @@ h3, h2{
     color: #AAAAAA;
 }
 
-.q_answer h4, h5{
+.q_answer h4, h5 {
     color: #F4B350;
 }
 
@@ -165,4 +165,8 @@ button {
     grid-template-columns: 0fr 0fr 8fr 6fr;
 
     text-align: center;
+}
+
+#search_phrase {
+    background-color: lightgoldenrodyellow;
 }
