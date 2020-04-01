@@ -20,24 +20,28 @@
         </div>
         <div></div>
     </div>
-    <div>Answers:</div>
+    <div><h3>Answers:</h3></div>
     <div class="answers">
         {% for answer in answers %}
-        <div id="answer">
-            <div>{{ answer.message }}</div>
-            <div>{{ answer.submission_time }}</div>
-            <div><a href="{{ url_for('edit_answer', answer_id=answer.id) }}"><button>Edit</button></a></div>
-        <div><button onclick="location.href='/comment/{{ answer.id }}/new_comment'" type="button">Comment</button></div>
-                {% for comment in comments %}
+        <div class="q_answer">
+            <div><h4>{{ answer.message }}</h4></div>
+            <div><p>{{ answer.submission_time }}</p></div>
+            <div class="answer_buttons">
+                <div><a href="{{ url_for('edit_answer', answer_id=answer.id) }}"><button>Edit</button></a></div>
+                <div><a href="{{ url_for('add_comment_to_answer', answer_id=answer.id) }}"><button>Comment</button></a></div>
+                <div></div>
+                <div></div>
+            </div>
+            {% for comment in comments %}
                     {% if comment.answer_id == answer.id%}
                         <div>{{ comment.message }}</div>
                         <div><a href="{{ url_for('edit_comment', comment_id=comment.id) }}"><button>Edit</button></a></div>
                         <div><a href="{{ url_for('delete_comment', comment_id=comment.id) }}" onclick="return confirm('Are you sure you want to delete this item?');"><img src="http://icons.iconarchive.com/icons/icons8/windows-8/48/Industry-Trash-icon.png" height="16" width="13"></a></div>
-
-            </div>
                     {% endif %}
                 {% endfor %}
-        {% endfor %}
+            {% endfor %}
+        </div>
+
         <div id="user_answer">
             <form name="question" method="post" enctype="multipart/form-data">
                 <div>Your answer:</div>
