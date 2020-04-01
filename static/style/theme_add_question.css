@@ -1,4 +1,5 @@
 input[type=text] {
+    background-color: #181a1b;
     width: 20%;
     padding: 12px;
     border: 1px solid #ccc;
@@ -8,6 +9,7 @@ input[type=text] {
 }
 
 textarea {
+    background-color: #181a1b;
     width: 40%;
     padding: 12px;
     border: 1px solid #ccc;
@@ -23,7 +25,7 @@ textarea {
 div {
     border-radius: 5px;
     color: whitesmoke;
-    background-color: slategray;
+    background-color: rgb(60, 65, 70);
     padding: 20px;
 }
 
@@ -36,3 +38,8 @@ button {
     margin: 4px 2px;
     cursor: pointer;
 }
+
+#hr {
+    border: 2px solid #E7903C;
+}
+
