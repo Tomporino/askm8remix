@@ -10,7 +10,8 @@
             <form method="post" action="{{ url_for('add_question') }}">
 
                 <div id="title">
-                    <label for="title">Question Title: </label>
+                    <h3><label for="title">Question Title: </label></h3>
+                    <br>
                     <input name="title" type="text">
                 </div>
 
@@ -31,9 +32,9 @@
                         </select>
                     </div>
 
-{#                    <div id="file">#}
-{#                        <input type="file" name="image">#}
-{#                    </div>#}
+                    {#                    <div id="file">#}
+                    {#                        <input type="file" name="image">#}
+                    {#                    </div>#}
 
                     <div id="submit">
                         <button name="submit" type="submit">Submit</button>
