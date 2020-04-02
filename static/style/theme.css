@@ -6,11 +6,11 @@ body {
 }
 
 body p {
-    color:  #F4B350;
+    color: #F4B350;
 }
 
 body a {
-    color:  #E7903C;
+    color: #E7903C;
 }
 
 body a:hover {
@@ -43,12 +43,18 @@ h1 {
 }
 
 textarea {
-    border-radius: 5px;
+    font-family: Arial, serif;
     background-color: #d6d6d6;
-    -moz-box-shadow:    inset 0 0 10px #000000;
-   -webkit-box-shadow: inset 0 0 10px #000000;
-   box-shadow:         inset 0 0 10px #000000;
-    font-family: Helvetic, monospace;
+    -moz-box-shadow: inset 0 0 10px #000000;
+    -webkit-box-shadow: inset 0 0 10px #000000;
+    box-shadow: inset 0 0 10px #000000;
+    color: black;
+    width: 60%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    resize: vertical;
 }
 
 font {
@@ -216,7 +222,15 @@ i {
     color: #f1f2f1;
 }
 
-
+#submit_button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 10px 26px;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
+}
 
 /*#answer_form {*/
 /*    border-radius: 5px;*/

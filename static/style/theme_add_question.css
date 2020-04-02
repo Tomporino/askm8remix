@@ -1,5 +1,10 @@
 input[type=text] {
-    background-color: #181a1b;
+    font-family: Arial, Serif;
+    color: black;
+    background-color: #d6d6d6;
+    -moz-box-shadow: inset 0 0 10px #000000;
+    -webkit-box-shadow: inset 0 0 10px #000000;
+    box-shadow: inset 0 0 10px #000000;
     width: 28%;
     padding: 12px;
     border: 1px solid #ccc;
@@ -9,7 +14,12 @@ input[type=text] {
 }
 
 textarea {
-    background-color: #181a1b;
+    font-family: Arial, serif;
+    background-color: #d6d6d6;
+    -moz-box-shadow: inset 0 0 10px #000000;
+    -webkit-box-shadow: inset 0 0 10px #000000;
+    box-shadow: inset 0 0 10px #000000;
+    color: black;
     width: 40%;
     padding: 12px;
     border: 1px solid #ccc;
@@ -24,7 +34,7 @@ textarea {
 
 .add_question div {
     border-radius: 5px;
-    color: whitesmoke;
+    color: #AAAAAA;
     padding: 20px;
 }
 
@@ -42,6 +52,6 @@ button {
     border: 2px solid #E7903C;
 }
 
-#title, #add-question{
+#title, #add-question {
     box-shadow: 0px 10px 25px 15px #333;
 }

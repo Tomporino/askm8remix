@@ -11,7 +11,6 @@
 
                 <div id="title">
                     <label for="title">Question Title: </label>
-
                     <input name="title" type="text">
                 </div>
 
@@ -25,7 +24,6 @@
                     <div id="tag-selector">
                         <label for="tag-selector">Select tag</label>
                         <select name="tag-selector">
-
                             <option name="None" value=None>None</option>
                             {% for tag in tags %}
                                 <option name="{{ tag.name }}" value="{{ tag.id }}">{{ tag.name }}</option>
@@ -33,9 +31,9 @@
                         </select>
                     </div>
 
-                    <div id="file">
-                        <input type="file" name="image">
-                    </div>
+{#                    <div id="file">#}
+{#                        <input type="file" name="image">#}
+{#                    </div>#}
 
                     <div id="submit">
                         <button name="submit" type="submit">Submit</button>
