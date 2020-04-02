@@ -7,6 +7,8 @@ def get_current_time():
 
 def get_valid_questions(questions, search_phrase, key):
     for question in questions:
-        if search_phrase in question[key]:
-            question[key] = question[key].replace(search_phrase,
-                                                  '<span id="search_phrase">' + search_phrase + '</span>')
+        if search_phrase.lower() in question[key].lower():
+            for word in question[key].split(" "):
+                if word.lower() == search_phrase.lower():
+                    question[key] = question[key].replace(word,
+                                                          '<span id="search_phrase">' + word + '</span>')
