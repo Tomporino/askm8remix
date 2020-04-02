@@ -20,10 +20,13 @@
         </div>
         <div></div>
     </div>
-    <div><h2>Answers:</h2></div>
+    <div class="answer-head-text">
+        <h1>Answers:</h1>
+    </div>
     <div class="answers">
         {% for answer in answers %}
         <div class="q_answer">
+            <div class="answer-message-part">
             <div><h4>{{ answer.message }}</h4></div>
             <div><p>{{ answer.submission_time }}</p></div>
             <div class="answer_buttons">
@@ -32,6 +35,8 @@
                 <div></div>
                 <div></div>
             </div>
+            </div>
+            <div class="answer-comment-part">
             {% for comment in comments %}
                     {% if comment.answer_id == answer.id%}
                         <div class="q_answ_comm"><h5>{{ comment.message }}</h5></div>
@@ -47,17 +52,18 @@
             {% endfor %}
         </div>
         </div>
-
-        <div id="user_answer">
+        </div>
+        <div class="answer-message">
             <form name="question" method="post" enctype="multipart/form-data">
                 <div><h3>Your answer:</h3></div>
-                    <textarea name="answer_message" id="answer_form" cols="50" rows="8"></textarea>
+                    <div><textarea name="answer_message"  cols="50" rows="8"></textarea></div>
                 <button type="submit">Submit</button>
                 <div>
                     <input type="file" id="img" name="image" >
                 </div>
             </form>
         </div>
+
 
 
 {% endblock %}
