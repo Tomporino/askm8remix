@@ -169,6 +169,14 @@ def search():
     return render_template('home.html', questions=questions)
 
 
+@app.route('/questions/<answer_id>/delete_answer')
+def delete_answer(answer_id):
+    answer = data_handler.get_selected_answer(answer_id)
+    data_handler.delete_answer(answer_id)
+
+    return redirect(url_for('question', question_id=answer['question_id']))
+
+
 if __name__ == '__main__':
     app.run(
         debug=True
