@@ -22,7 +22,7 @@ textarea {
     padding: 10%;
 }
 
-div {
+.content-wrapper div {
     border-radius: 5px;
     color: whitesmoke;
     background-color: rgb(60, 65, 70);
