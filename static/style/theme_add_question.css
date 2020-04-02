@@ -22,10 +22,9 @@ textarea {
     padding: 10%;
 }
 
-.content-wrapper div {
+.add_question div {
     border-radius: 5px;
     color: whitesmoke;
-    /*background-color: rgb(60, 65, 70);*/
     padding: 20px;
 }
 
