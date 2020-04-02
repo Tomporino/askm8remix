@@ -6,7 +6,7 @@
         <div id="home_main">
             <div class="headbar">
                 <div class="selectors">
-                    <div><form action="/" method="post">
+                    <div><form action="{{ url_for('home') }}" method="post">
                         <div id="selectors">
                             <div id="selector_button">
                                 <select name="selector">
@@ -58,6 +58,6 @@
         <div></div>
     </div>
     {% if limit %}
-        <div><button>MORE</button></div>
+        <div><button><a href="{{ url_for('home') }}">MORE</a></button></div>
     {% endif %}
 {% endblock %}
