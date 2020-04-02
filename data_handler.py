@@ -225,7 +225,7 @@ def get_search_questions(cursor, search_phrase):
     query = """
             SELECT *
             FROM question
-            WHERE LOWER( title ) LIKE %(search)s OR LOWER( message ) LIKE %(search)s;
+            WHERE title ILIKE %(search)s OR message ILIKE %(search)s;
     """
     cursor.execute(query, {'search': '%' + search_phrase + '%'})
     return cursor.fetchall()
@@ -238,4 +238,4 @@ def delete_answer(cursor, answer_id):
         WHERE id = %(answer_id)s;
         DELETE FROM comment
         WHERE answer_id = %(answer_id)s"""
-    cursor.execute(query, {'answer_id':answer_id})
+    cursor.execute(query, {'answer_id': answer_id})
