@@ -25,20 +25,11 @@
                                     </select>
                                 </div>
                                 <div id="submit_button">
-                                    <button type="submit">Sort</button>
+                                    <button type="submit"><i class="glyphicon glyphicon-sort"></i></button>
                                 </div>
                             </div>
-                            <div id="selector_button">
-                                <select name="direction">
-                                    <option name="ASC" value="ASC">ASC</option>
-                                    <option name="DESC" value="DESC">DESC</option>
-                                </select>
-                            </div>
-                            <div id="submit_button">
-                                <button type="submit"><i class="glyphicon glyphicon-sort"></i></button>
-                            </div>
-                        </div>
-                    </form></div>
+                        </form>
+                    </div>
                 </div>
                 <div class="search">
                     <form action="{{ url_for('search') }}" method="post">
@@ -60,18 +51,11 @@
                 </div>
                 {% for question in questions %}
                     <div id="question">
-                        <div>
-                            <a href="{{ url_for('question', question_id=question.id) }}">{{ question.title|safe }}</a>
+                        <div><a href="{{ url_for('question', question_id=question.id) }}">{{ question.title|safe }}</a>
                         </div>
-                        <div>
-                            <p>{{ question.view_number }}</p>
-                        </div>
-                        <div>
-                            <p>{{ question.vote_number }}</p>
-                        </div>
-                        <div>
-                            <p>{{ question.submission_time.strftime('%Y-%m-%d ') }}</p>
-                        </div>
+                        <div><p>{{ question.view_number }}</p></div>
+                        <div><p>{{ question.vote_number }}</p></div>
+                        <div><p>{{ question.submission_time.strftime('%Y-%m-%d ') }}</p></div>
                     </div>
                 {% endfor %}
             </div>
@@ -82,7 +66,7 @@
         <div class="index">
             <div></div>
             <div>
-                <button><a href="{{ url_for('home') }}">MORE</a></button>
+                <button><a href="{{ url_for('home') }}"><i class="glyphicon glyphicon-menu-hamburger"></i></a></button>
             </div>
             <div></div>
         </div>
