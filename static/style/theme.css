@@ -23,6 +23,11 @@ button {
     color: black;
 }
 
+.buttons {
+    border-radius: 3px;
+    color: black;
+}
+
 button a {
     color: black;
 }
@@ -199,8 +204,16 @@ i {
 
 #comments {
     display: grid;
-    grid-template-columns: 1fr 2fr;
+    grid-template-columns: 1fr 5fr 4fr;
     text-align: left;
+}
+
+#comment {
+    padding: 10px;
+}
+
+#comment i {
+    color: #f1f2f1;
 }
 
 
