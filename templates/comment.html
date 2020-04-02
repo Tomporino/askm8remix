@@ -1,25 +1,27 @@
 {% extends 'layout.html' %}
 {% block content %}
      {% if edit  %}
-        <div id="edit_comment">
+        <div class"edit_comment">
             <form name="edit_comm_form" method="post">
-                <textarea name="edit_comment" id="edit_com" cols="50" rows="8">{{ comment.message }}</textarea>
+                <div><textarea name="edit_comment" id="edit_com" cols="50" rows="8">{{ comment.message }}</textarea></div>
                 <div>{{ comment.submission_time }}</div>
                 <button type="submit">Edit</button>
             </form>
         </div>
     {% else %}
 
-    <div id="answer_comment">
-                <div>{{ answer.message }}</div>
-                <div>{{ answer.submission_time }}</div>
-            </div>
-            <div id="answer_comment">
+        <div class="answer_comment">
+                <div><h3>{{ answer.message }}</h3></div>
+                <div class="sub_data"><p>{{ answer.submission_time }}</p></div>
+        </div>
+
+            <div class="answer_comment_form">
                 <h3>Your comment:</h3>
                     <form name="answer_comment" method="post">
-                        <textarea name="answer_comment" id="comment_form" cols="50" rows="8"></textarea>
+                        <div><textarea name="answer_comment" id="comment_form" cols="50" rows="8"></textarea></div>
                         <button type="submit">Submit</button>
                     </form>
             </div>
+
    {% endif %}
 {% endblock %}
