@@ -36,6 +36,7 @@ textarea {
     border-radius: 5px;
     color: #AAAAAA;
     padding: 20px;
+    margin: 24px;
 }
 
 button {
@@ -50,6 +51,7 @@ button {
 
 #hr {
     border: 2px solid #E7903C;
+    margin: 24px;
 }
 
 #title, #add-question {
