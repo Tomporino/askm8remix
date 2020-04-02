@@ -49,8 +49,8 @@ def add_question():
             'image': None
         }
         question_id = data_handler.add_question(user_question)
-        if request.form['tag_selector'] != 'None':
-            data_handler.set_question_tag(question_id['id'], int(request.form['tag_selector']))
+        if request.form['tag-selector'] != 'None':
+            data_handler.set_question_tag(question_id['id'], int(request.form['tag-selector']))
         return redirect('/')
     return render_template('add_question.html', tags=data_handler.get_tags())
 
