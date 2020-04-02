@@ -214,7 +214,7 @@ def get_search_questions(cursor, search_phrase):
     query = """
             SELECT *
             FROM question
-            WHERE LOWER( title ) LIKE %(search)s;
+            WHERE LOWER( title ) LIKE %(search)s OR LOWER( message ) LIKE %(search)s;
     """
     cursor.execute(query, {'search': '%' + search_phrase + '%'})
     return cursor.fetchall()
