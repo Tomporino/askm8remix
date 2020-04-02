@@ -21,8 +21,16 @@ body a:hover {
     grid-template-columns: 1fr 4fr 1fr;
 }
 
-.headbar button, select, input {
+body button, select, input {
     border-radius: 5px;
+}
+
+.index {
+    display: grid;
+    grid-template-columns: 2fr 1fr 2fr;
+    text-align: center;
+    margin: 10px;
+    padding: 10px;
 }
 
 .content_wrapper {
