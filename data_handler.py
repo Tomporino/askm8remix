@@ -6,9 +6,20 @@ import connection
 def get_questions(cursor):
     query = """
             SELECT * FROM question
-            ORDER BY submission_time;
+            ORDER BY submission_time DESC;
             """
     cursor.execute(query)
+    return cursor.fetchall()
+
+
+@connection.connection_handler
+def get_top_questions(cursor, n):
+    query = """
+            SELECT * FROM question
+            ORDER BY submission_time DESC
+            LIMIT %(n)s;
+            """
+    cursor.execute(query, {'n': n})
     return cursor.fetchall()
 
 

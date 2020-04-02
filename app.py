@@ -6,6 +6,12 @@ import error_handling
 app = Flask(__name__)
 
 
+@app.route('/index')
+def index():
+    questions = data_handler.get_top_questions(5)
+    return render_template('home.html', questions=questions, limit=True)
+
+
 @app.route('/', methods=['GET', 'POST'])
 def home():
     if request.method == 'POST':
