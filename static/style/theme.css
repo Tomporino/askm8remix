@@ -155,6 +155,10 @@ hr {
     color: #E7903C;
 }
 
+.question_page i:hover {
+    color: #FF6347;
+}
+
 .answers_comments, .question {
     display: grid;
     grid-template-columns: 2fr 1fr;
