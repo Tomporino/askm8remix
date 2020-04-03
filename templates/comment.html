@@ -1,27 +1,28 @@
 {% extends 'layout.html' %}
 {% block content %}
-     {% if edit  %}
-        <div class"edit_comment">
-            <form name="edit_comm_form" method="post">
-                <div><textarea name="edit_comment" id="edit_com" cols="50" rows="8">{{ comment.message }}</textarea></div>
-                <div>{{ comment.submission_time }}</div>
-                <button type="submit">Edit</button>
-            </form>
-        </div>
-    {% else %}
+    <div class="comment_content">
+         {% if edit  %}
+            <div class="edit_comment">
+                <form name="edit_comm_form" method="post">
+                    <div><textarea name="edit_comment" id="edit_com" cols="50" rows="8">{{ comment.message }}</textarea></div>
+                    <div>{{ comment.submission_time }}</div>
+                    <button type="submit">Edit</button>
+                </form>
+            </div>
+        {% else %}
 
-        <div class="answer_comment">
-                <div><h3>{{ answer.message }}</h3></div>
-                <div class="sub_data"><p>{{ answer.submission_time }}</p></div>
-        </div>
-
-            <div class="answer_comment_form">
-                <h3>Your comment:</h3>
-                    <form name="answer_comment" method="post">
-                        <div><textarea name="answer_comment" id="comment_form" cols="50" rows="8"></textarea></div>
-                        <button type="submit">Submit</button>
-                    </form>
+            <div class="answer_comment">
+                    <div id="message"><p>{{ answer.message }}</p></div>
+                    <div class="sub_data"><p>{{ answer.submission_time }}</p></div>
             </div>
 
-   {% endif %}
+                <div class="answer_comment_form">
+                    <h3>Your comment:</h3>
+                        <form name="answer_comment" method="post">
+                            <div><textarea name="answer_comment" id="comment_form" cols="50" rows="8"></textarea></div>
+                            <button type="submit" id="submit_button">Submit</button>
+                        </form>
+                </div>
+       {% endif %}
+    </div>
 {% endblock %}

@@ -6,41 +6,43 @@
 
 {% block content %}
     <div class="content">
-        <div class="add_question">
-            <form method="post" action="{{ url_for('add_question') }}">
+        <div>
+            <div class="add_question">
+                <form method="post" action="{{ url_for('add_question') }}">
 
-                <div id="title">
-                    <h3><label for="title">Question Title: </label></h3>
-                    <br>
-                    <input name="title" type="text">
-                </div>
-
-                <hr id="hr">
-
-                <div id="add-question">
-                    <div id="text">
-                        <textarea name="message" placeholder="Your Question..." rows="10"></textarea>
+                    <div id="title">
+                        <input name="title" type="text" placeholder="Title">
                     </div>
 
-                    <div id="tag-selector">
-                        <label for="tag-selector">Select tag</label>
-                        <select name="tag-selector">
-                            <option name="None" value=None>None</option>
-                            {% for tag in tags %}
-                                <option name="{{ tag.name }}" value="{{ tag.id }}">{{ tag.name }}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
+                    <hr id="hr">
 
-                    {#                    <div id="file">#}
-                    {#                        <input type="file" name="image">#}
-                    {#                    </div>#}
+                    <div id="add-question">
+                        <div id="text">
+                            <textarea name="message" placeholder="Your Question..." rows="10"></textarea>
+                        </div>
+                        <div>
+                            <div id="tag-selector">
+                                <label for="tag-selector">Select tag</label>
+                                <select name="tag-selector">
+                                    <option name="None" value=None>None</option>
+                                    {% for tag in tags %}
+                                        <option name="{{ tag.name }}" value="{{ tag.id }}">{{ tag.name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
 
-                    <div id="submit">
-                        <button name="submit" type="submit">Submit</button>
+        {#                    <div id="file">#}
+        {#                        <input type="file" name="image">#}
+        {#                    </div>#}
+
+                            <div id="submit">
+                                <button name="submit" type="submit">Submit</button>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
+        <div></div>
     </div>
 {% endblock %}

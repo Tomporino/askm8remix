@@ -37,9 +37,8 @@ h3 {
 }
 
 h1 {
-    color: #b1b4b5;
+    color: #AAAAAA;
     font-weight: bold;
-    text-shadow: 2px 2px black;
 }
 
 textarea {
@@ -63,6 +62,10 @@ font {
 
 i {
     color: black;
+}
+
+hr {
+    margin-left: 24px;
 }
 
 .content_wrapper {
@@ -144,6 +147,12 @@ i {
 .question_page {
     display: grid;
     grid-template-columns: 3fr 1fr;
+    margin-left: 24px;
+    padding: 10px;
+}
+
+.question_page i {
+    color: #E7903C;
 }
 
 .answers_comments, .question {
@@ -153,7 +162,7 @@ i {
 
 .question_buttons {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 2fr;
+    grid-template-columns: 1fr 1fr 1fr 5fr;
     padding: 10px;
     text-align: center;
 }
@@ -175,7 +184,7 @@ i {
 
 .sub_data {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 2fr;
 }
 
 .sub_data p {
@@ -187,13 +196,16 @@ i {
     margin: 6px;
     margin-top: 10px;
     padding: 20px;
-    border-radius: 3px;
+    border-radius: 5px;
     width: 43%;
 }
 
 .answers {
-    box-shadow: 0px 10px 25px 15px;
     padding: 10px;
+    border-radius: 5px;
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-row-gap: 10px;
 }
 
 .answer_buttons {
@@ -205,7 +217,11 @@ i {
 }
 
 #answer {
+    -moz-box-shadow:    inset 0 0 10px #000000;
+    -webkit-box-shadow: inset 0 0 10px #000000;
+    box-shadow:         inset 0 0 10px #000000;
     padding: 10px;
+    border-radius: 5px;
 }
 
 #comments {
@@ -218,8 +234,9 @@ i {
     padding: 10px;
 }
 
-#comment i {
-    color: #f1f2f1;
+.sub_data#comment {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
 }
 
 #submit_button {
@@ -232,6 +249,27 @@ i {
     cursor: pointer;
 }
 
+/* comment.html */
+
+.answer_comment {
+    margin-top: 35px;
+    box-shadow: 0px 10px 25px 15px;
+    border-radius: 6px;
+    padding: 10px;
+    width: 60%;
+}
+
+#message p {
+    font-size: 1.5em;
+}
+
+.comment_content {
+    margin-left: 24px;
+}
+
+#answ_mssg p {
+    font-size: 1.5em;
+}
 /*#answer_form {*/
 /*    border-radius: 5px;*/
 /*}*/
