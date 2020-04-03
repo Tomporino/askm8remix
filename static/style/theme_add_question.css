@@ -1,4 +1,5 @@
 input[type=text] {
+    margin-left: 24px;
     font-family: Arial, Serif;
     color: black;
     background-color: #d6d6d6;
@@ -15,27 +16,39 @@ input[type=text] {
 
 textarea {
     font-family: Arial, serif;
+    color: black;
     background-color: #d6d6d6;
     -moz-box-shadow: inset 0 0 10px #000000;
     -webkit-box-shadow: inset 0 0 10px #000000;
     box-shadow: inset 0 0 10px #000000;
-    color: black;
-    width: 40%;
     padding: 12px;
+    width: 80%;
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
-    resize: vertical;
+    resize: none;
+}
+
+.content {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
 }
 
 .content-wrapper {
     padding: 10%;
 }
 
+#add-question {
+    grid-template-columns: 2fr 1fr;
+    text-align: left;
+}
+
 .add_question div {
     border-radius: 5px;
     color: #AAAAAA;
     padding: 20px;
+    margin-left: 24px;
+    display: grid;
 }
 
 button {
