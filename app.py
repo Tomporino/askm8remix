@@ -177,6 +177,28 @@ def delete_answer(answer_id):
     return redirect(url_for('question', question_id=answer['question_id']))
 
 
+@app.route('/registration', methods=['POST', 'GET'])
+def register():
+    if request.method == 'POST':
+        user_data = {
+            'username': request.form['username'],
+            'password': util.hash_pass(request.form['password']),
+            'password_confirm': util.hash_pass(request.form['password_confirm']),
+            'email': request.form['email']
+        }
+        if error_handling.check_registration(user_data):
+            data_handler.save_user(user_data)
+            return redirect(url_for('index'))
+    return render_template('registration.html')
+
+
+@app.route('/login', methods=['POST', 'GET'])
+def login():
+    if request.method == 'POST':
+        pass
+    return render_template('login.html')
+
+
 if __name__ == '__main__':
     app.run(
         debug=True

@@ -236,8 +236,26 @@ def get_search_questions(cursor, search_phrase):
 @connection.connection_handler
 def delete_answer(cursor, answer_id):
     query = """
+        DELETE FROM comment
+        WHERE answer_id = %(answer_id)s
         DELETE FROM answer
         WHERE id = %(answer_id)s;
-        DELETE FROM comment
-        WHERE answer_id = %(answer_id)s"""
+        """
     cursor.execute(query, {'answer_id': answer_id})
+
+
+@connection.connection_handler
+def save_user(cursor, user_data):
+    cursor.execute('''
+        INSERT INTO users (username, password, email)
+        VALUES (%(username)s, %(password)s, %(email)s)
+    ''', user_data)
+
+
+@connection.connection_handler
+def get_users(cursor):
+    cursor.execute('''
+            SELECT username, email
+            FROM users
+            ''')
+    return cursor.fetchall()
