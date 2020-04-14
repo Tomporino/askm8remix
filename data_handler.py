@@ -96,6 +96,8 @@ def edit_question(cursor, details):
 @connection.connection_handler
 def delete_question(cursor, question_id):
     query = """
+            DELETE FROM comment
+            WHERE question_id=%(id)s;
             DELETE FROM answer
             WHERE question_id=%(id)s;
             DELETE FROM question_tag
