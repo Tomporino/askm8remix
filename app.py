@@ -1,10 +1,10 @@
-from flask import Flask, render_template, redirect, request, url_for
+from flask import Flask, render_template, redirect, request, url_for, session
 import data_handler
 import util
 import error_handling
 
 app = Flask(__name__)
-
+app.secret_key = b'|\xbc\x93\xc0:&EXh5\xd1\xf5)|\x10N'
 
 @app.route('/')
 def index():
@@ -33,7 +33,8 @@ def question(question_id):
             'vote_number': 0,
             'question_id': question_id,
             'message': request.form['answer_message'],
-            'image': None
+            'image': None,
+            'user_id':session.get('id')
         }
         data_handler.add_answer(user_answer)
         return redirect(request.url)
@@ -52,7 +53,8 @@ def add_question():
             'vote_number': 0,
             'title': request.form['title'],
             'message': request.form['message'],
-            'image': None
+            'image': None,
+            'user_id': session.get('id')
         }
         question_id = data_handler.add_question(user_question)
         if request.form['tag-selector'] != 'None':
@@ -108,7 +110,8 @@ def add_comment_to_answer(answer_id):
             'answer_id': answer_id,
             'message': request.form['answer_comment'],
             'submission_time': util.get_current_time(),
-            'edited_count': 0
+            'edited_count': 0,
+            'user_id': session.get('id')
         }
         data_handler.add_comment(answer_comment)
         return redirect(url_for('question', question_id=answer['question_id']))
@@ -151,6 +154,7 @@ def edit_comment(comment_id):
 
 @app.route('/comment/<comment_id>/delete')
 def delete_comment(comment_id):
+
     comment = data_handler.get_comment_by_id(comment_id)
     data_handler.delete_comment(comment_id)
 
@@ -194,9 +198,30 @@ def register():
 
 @app.route('/login', methods=['POST', 'GET'])
 def login():
+    wrong_login = None
     if request.method == 'POST':
-        pass
-    return render_template('login.html')
+
+        username = request.form['login-username']
+        password = request.form['login-password']
+
+        if util.check_login(username, password) == True:
+            session['username'] = util.get_user_detail(username, 'username')
+            session['id'] = util.get_user_detail(username, 'id')
+            session['email'] = util.get_user_detail(username, 'email')
+
+            return redirect('/')
+
+        else:
+            wrong_login = True
+
+    return render_template('login.html', wrong_login=wrong_login)
+
+@app.route('/logut')
+def logout():
+    session.pop('username', None)
+    session.pop('id', None)
+    session.pop('email', None)
+    return redirect('/')
 
 
 if __name__ == '__main__':
