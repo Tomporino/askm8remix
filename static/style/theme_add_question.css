@@ -61,11 +61,6 @@ button {
     cursor: pointer;
 }
 
-#hr {
-    border: 2px solid #E7903C;
-    margin: 24px;
-}
-
 #title, #add-question {
     box-shadow: 0px 10px 25px 15px #333;
 }
