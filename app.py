@@ -2,6 +2,7 @@ from flask import Flask, render_template, redirect, request, url_for, session
 import data_handler
 import util
 import error_handling
+from datetime import date
 
 app = Flask(__name__)
 app.secret_key = b'|\xbc\x93\xc0:&EXh5\xd1\xf5)|\x10N'
@@ -66,6 +67,7 @@ def add_question():
 @app.route('/question/<question_id>/upvote')
 def upvote_question(question_id):
     data_handler.upvote_question(question_id)
+    data_handler.upvote_reputation_question(question_id)
     return redirect(url_for('question', question_id=question_id))
 
 
@@ -188,7 +190,9 @@ def register():
             'username': request.form['username'],
             'password': util.hash_pass(request.form['password']),
             'password_confirm': util.hash_pass(request.form['password_confirm']),
-            'email': request.form['email']
+            'email': request.form['email'],
+            'registration_date':date.today()
+
         }
         if error_handling.check_registration(user_data):
             data_handler.save_user(user_data)
@@ -216,12 +220,21 @@ def login():
 
     return render_template('login.html', wrong_login=wrong_login)
 
+
 @app.route('/logut')
 def logout():
     session.pop('username', None)
     session.pop('id', None)
     session.pop('email', None)
     return redirect('/')
+
+
+@app.route('/questions/<answer_id>/answer_vote_up')
+def voteup_answer(answer_id):
+    answer = data_handler.get_selected_answer(answer_id)
+    data_handler.upvote_answer(answer_id)
+    data_handler.upvote_reputation_answer(answer_id)
+    return redirect(url_for('question', question_id=answer['question_id']))
 
 
 if __name__ == '__main__':
