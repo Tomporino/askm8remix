@@ -1,5 +1,15 @@
 {% extends 'layout.html' %}
 {% block content %}
-
-
+    {% if wrong_login == True %}
+        <div id="wrong-login">
+            <h3>Wrong username or password, try again.</h3>
+        </div>
+    {% endif %}
+    <div class="login">
+        <form method="post" name="login-details">
+            <input name="login-username" placeholder="Your Username">
+            <input type="password" name="login-password" placeholder="Your password">
+            <button type="submit">Go</button>
+        </form>
+    </div>
 {% endblock %}

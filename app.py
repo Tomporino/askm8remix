@@ -1,10 +1,10 @@
-from flask import Flask, render_template, redirect, request, url_for
+from flask import Flask, render_template, redirect, request, url_for, session
 import data_handler
 import util
 import error_handling
 
 app = Flask(__name__)
-
+app.secret_key = b'|\xbc\x93\xc0:&EXh5\xd1\xf5)|\x10N'
 
 @app.route('/')
 def index():
@@ -194,9 +194,25 @@ def register():
 
 @app.route('/login', methods=['POST', 'GET'])
 def login():
+    wrong_login = None
     if request.method == 'POST':
-        pass
-    return render_template('login.html')
+
+        username = request.form['login-username']
+        password = request.form['login-password']
+
+        if util.check_login(username, password) == True:
+            session['username'] = util.get_user_detail(username, 'username')
+            session['id'] = util.get_user_detail(username, 'id')
+            session['email'] = util.get_user_detail(username, 'email')
+
+            return redirect('/')
+
+        else:
+            wrong_login = True
+
+    return render_template('login.html', wrong_login=wrong_login)
+
+
 
 
 if __name__ == '__main__':

@@ -255,7 +255,20 @@ def save_user(cursor, user_data):
 @connection.connection_handler
 def get_users(cursor):
     cursor.execute('''
-            SELECT username, email
+            SELECT *
             FROM users
             ''')
     return cursor.fetchall()
+
+
+@connection.connection_handler
+def get_right_user(cursor, userdata):
+    cursor.execute('''
+        SELECT id,username,password,email
+        FROM users
+        WHERE username=%(userdata)s
+        ''', {'userdata':userdata})
+    return cursor.fetchall()
+
+
+
