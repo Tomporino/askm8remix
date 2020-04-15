@@ -31,7 +31,7 @@ CREATE TABLE public.answer (
     question_id integer,
     message text,
     image text,
-    user_id integer
+    user_id integer NOT NULL
 );
 
 
@@ -70,7 +70,7 @@ CREATE TABLE public.comment (
     message text,
     submission_time timestamp without time zone,
     edited_count integer,
-    user_id integer
+    user_id integer NOT NULL
 );
 
 
@@ -110,7 +110,7 @@ CREATE TABLE public.question (
     title text,
     message text,
     image text,
-    user_id integer
+    user_id integer NOT NULL
 );
 
 
@@ -263,6 +263,7 @@ ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_
 
 COPY public.answer (id, submission_time, vote_number, question_id, message, image, user_id) FROM stdin;
 20	2020-04-15 21:37:10	64	19	yu du	\N	1
+22	2020-04-15 22:23:21	0	20	Why is that man, you should spill it	\N	1
 \.
 
 
@@ -279,7 +280,8 @@ COPY public.comment (id, question_id, answer_id, message, submission_time, edite
 --
 
 COPY public.question (id, submission_time, view_number, vote_number, title, message, image, user_id) FROM stdin;
-19	2020-04-15 19:24:37	39	7	Yo	Eat it br	\N	1
+19	2020-04-15 19:24:37	42	8	Yo	Eat it br	\N	1
+20	2020-04-15 22:21:13	3	0	Yo homies	I cant eat my chickensoup	\N	4
 \.
 
 
@@ -289,6 +291,7 @@ COPY public.question (id, submission_time, view_number, vote_number, title, mess
 
 COPY public.question_tag (question_id, tag_id) FROM stdin;
 19	2
+20	1
 \.
 
 
@@ -310,7 +313,8 @@ COPY public.tag (id, name) FROM stdin;
 COPY public.users (id, username, password, email, registration_date, reputation) FROM stdin;
 2	kiskutyika	$2b$12$j8pSzmymLfnIWudKKKI0HeY.UTj/jLwxZHJAYj1h5uNYgc0g8tmj6	kiskutyika@kutyasz.com	\N	0
 3	tester	$2b$12$FlhqlEgTxjzfA38YB71LJ.WK7ja3diaBsou8dUsIgu6f2.FsnkHj2	test@er.com	2020-04-15	0
-1	Bela	$2b$12$ft//lfRMUMHkhwrgBjLdpeGf/Su.o9rKUCLbrfBwr0.di3ZbfesU6	john@hoe.com	\N	631
+1	Bela	$2b$12$ft//lfRMUMHkhwrgBjLdpeGf/Su.o9rKUCLbrfBwr0.di3ZbfesU6	john@hoe.com	\N	636
+4	testerr	$2b$12$3yrLX3CFeRDBepsgBdHYdu/0HGC5YHAfo9KUQQ7hA0dnbjPasCj8y	test@err.com	2020-04-15	0
 \.
 
 
@@ -318,7 +322,7 @@ COPY public.users (id, username, password, email, registration_date, reputation)
 -- Name: answer_id_seq; Type: SEQUENCE SET; Schema: public; Owner: dani
 --
 
-SELECT pg_catalog.setval('public.answer_id_seq', 20, true);
+SELECT pg_catalog.setval('public.answer_id_seq', 22, true);
 
 
 --
@@ -332,7 +336,7 @@ SELECT pg_catalog.setval('public.comment_id_seq', 24, true);
 -- Name: question_id_seq; Type: SEQUENCE SET; Schema: public; Owner: dani
 --
 
-SELECT pg_catalog.setval('public.question_id_seq', 19, true);
+SELECT pg_catalog.setval('public.question_id_seq', 20, true);
 
 
 --
@@ -346,7 +350,7 @@ SELECT pg_catalog.setval('public.tag_id_seq', 3, true);
 -- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: dani
 --
 
-SELECT pg_catalog.setval('public.users_id_seq', 3, true);
+SELECT pg_catalog.setval('public.users_id_seq', 4, true);
 
 
 --
@@ -395,27 +399,6 @@ ALTER TABLE ONLY public.tag
 
 ALTER TABLE ONLY public.users
     ADD CONSTRAINT users_pk PRIMARY KEY (id);
-
-
---
--- Name: answer_user_id_uindex; Type: INDEX; Schema: public; Owner: dani
---
-
-CREATE UNIQUE INDEX answer_user_id_uindex ON public.answer USING btree (user_id);
-
-
---
--- Name: comment_user_id_uindex; Type: INDEX; Schema: public; Owner: dani
---
-
-CREATE UNIQUE INDEX comment_user_id_uindex ON public.comment USING btree (user_id);
-
-
---
--- Name: question_user_id_uindex; Type: INDEX; Schema: public; Owner: dani
---
-
-CREATE UNIQUE INDEX question_user_id_uindex ON public.question USING btree (user_id);
 
 
 --
