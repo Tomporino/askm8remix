@@ -8,7 +8,7 @@
                 <span class="icon-bar"></span>
             </button>
             {% if 'username' in session %}
-            <a class="navbar-brand" href="/">{{ session['username'] }}</a>
+                <a class="navbar-brand" href="/">{{ session['username'] }}</a>
             {% endif %}
         </div>
         <div id="navbar" class="collapse navbar-collapse">
@@ -16,8 +16,11 @@
                 <li class="active"><a href="/">Home</a></li>
                 <li><a href="{{ url_for('add_question') }}">Ask!</a></li>
                 <li><a href="/">Account</a></li>
-                <li><a href="{{ url_for('login') }}">Login</a></li>
-                <li><a href="{{ url_for('logout') }}">Logout</a></li>
+                {% if session %}
+                    <li><a href="{{ url_for('logout') }}">Logout</a></li>
+                {% else %}
+                    <li><a href="{{ url_for('login') }}">Login</a></li>
+                {% endif %}
             </ul>
         </div>
     </div>
