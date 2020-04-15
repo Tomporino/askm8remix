@@ -78,7 +78,7 @@ def upvote_question(cursor, question_id):
     query = """
             UPDATE question
             SET vote_number = vote_number + 1
-            WHERE id = %(question_id)s;
+            WHERE question.id = %(question_id)s
             """
     cursor.execute(query, {'question_id': question_id})
 
@@ -267,8 +267,34 @@ def get_right_user(cursor, userdata):
         SELECT id,username,password,email
         FROM users
         WHERE username=%(userdata)s
-        ''', {'userdata':userdata})
+        ''', {'userdata': userdata})
     return cursor.fetchall()
 
 
+@connection.connection_handler
+def upvote_answer(cursor, answer_id):
+    cursor.execute('''
+            UPDATE answer
+            SET vote_number = vote_number + 1
+            WHERE answer.id = %(answer_id)s
+            ''', {'answer_id': answer_id})
 
+
+@connection.connection_handler
+def upvote_reputation_answer(cursor, answer_id):
+    cursor.execute('''
+            UPDATE users
+            SET reputation = reputation + 10
+            FROM answer
+            WHERE answer.id = %(answer_id)s AND answer.user_id = users.id
+            ''', {'answer_id': answer_id})
+
+
+@connection.connection_handler
+def upvote_reputation_question(cursor, question_id):
+    cursor.execute(''' 
+        UPDATE users
+        SET reputation = reputation + 5
+        FROM question
+        WHERE question.id = %(question_id)s AND question.user_id = users.id
+        ''', {'question_id': question_id})

@@ -67,6 +67,7 @@ def add_question():
 @app.route('/question/<question_id>/upvote')
 def upvote_question(question_id):
     data_handler.upvote_question(question_id)
+    data_handler.upvote_reputation_question(question_id)
     return redirect(url_for('question', question_id=question_id))
 
 
@@ -219,12 +220,21 @@ def login():
 
     return render_template('login.html', wrong_login=wrong_login)
 
+
 @app.route('/logut')
 def logout():
     session.pop('username', None)
     session.pop('id', None)
     session.pop('email', None)
     return redirect('/')
+
+
+@app.route('/questions/<answer_id>/answer_vote_up')
+def voteup_answer(answer_id):
+    answer = data_handler.get_selected_answer(answer_id)
+    data_handler.upvote_answer(answer_id)
+    data_handler.upvote_reputation_answer(answer_id)
+    return redirect(url_for('question', question_id=answer['question_id']))
 
 
 if __name__ == '__main__':
