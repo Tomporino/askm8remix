@@ -46,8 +46,8 @@ def get_answers_for_question(cursor, question_id):
 @connection.connection_handler
 def add_answer(cursor, details):
     query = """
-            INSERT INTO answer (submission_time, vote_number, question_id, message, image)
-            VALUES (%(submission_time)s, %(vote_number)s, %(question_id)s, %(message)s, %(image)s);
+            INSERT INTO answer (submission_time, vote_number, question_id, message, image, user_id)
+            VALUES (%(submission_time)s, %(vote_number)s, %(question_id)s, %(message)s, %(image)s, %(user_id)s);
             """
     cursor.execute(query, details)
 
@@ -55,8 +55,8 @@ def add_answer(cursor, details):
 @connection.connection_handler
 def add_question(cursor, details):
     query = """
-            INSERT INTO question (submission_time, view_number, vote_number, title, message, image)
-            VALUES (%(submission_time)s, %(view_number)s, %(vote_number)s, %(title)s, %(message)s, %(image)s)
+            INSERT INTO question (submission_time, view_number, vote_number, title, message, image, user_id)
+            VALUES (%(submission_time)s, %(view_number)s, %(vote_number)s, %(title)s, %(message)s, %(image)s, %(user_id)s)
             RETURNING id;
             """
     cursor.execute(query, details)
@@ -78,7 +78,7 @@ def upvote_question(cursor, question_id):
     query = """
             UPDATE question
             SET vote_number = vote_number + 1
-            WHERE id = %(question_id)s;
+            WHERE question.id = %(question_id)s
             """
     cursor.execute(query, {'question_id': question_id})
 
@@ -119,8 +119,8 @@ def get_ordered_data(cursor, column, direction):
 @connection.connection_handler
 def add_comment(cursor, comment):
     query = """
-        INSERT INTO comment (question_id, answer_id, message, submission_time, edited_count)
-        VALUES (%(question_id)s, %(answer_id)s, %(message)s, %(submission_time)s, %(edited_count)s)"""
+        INSERT INTO comment (question_id, answer_id, message, submission_time, edited_count, user_id)
+        VALUES (%(question_id)s, %(answer_id)s, %(message)s, %(submission_time)s, %(edited_count)s, %(user_id)s)"""
     cursor.execute(query, comment)
 
 
@@ -236,8 +236,65 @@ def get_search_questions(cursor, search_phrase):
 @connection.connection_handler
 def delete_answer(cursor, answer_id):
     query = """
-        DELETE FROM answer
-        WHERE id = %(answer_id)s;
         DELETE FROM comment
-        WHERE answer_id = %(answer_id)s"""
+        WHERE answer_id = %(answer_id)s;
+        DELETE FROM answer
+        WHERE id = %(answer_id)s
+        """
     cursor.execute(query, {'answer_id': answer_id})
+
+
+@connection.connection_handler
+def save_user(cursor, user_data):
+    cursor.execute('''
+        INSERT INTO users (username, password, email, registration_date)
+        VALUES (%(username)s, %(password)s, %(email)s, %(registration_date)s)
+    ''', user_data)
+
+
+@connection.connection_handler
+def get_users(cursor):
+    cursor.execute('''
+            SELECT *
+            FROM users
+            ''')
+    return cursor.fetchall()
+
+
+@connection.connection_handler
+def get_right_user(cursor, userdata):
+    cursor.execute('''
+        SELECT id,username,password,email
+        FROM users
+        WHERE username=%(userdata)s
+        ''', {'userdata': userdata})
+    return cursor.fetchall()
+
+
+@connection.connection_handler
+def upvote_answer(cursor, answer_id):
+    cursor.execute('''
+            UPDATE answer
+            SET vote_number = vote_number + 1
+            WHERE answer.id = %(answer_id)s
+            ''', {'answer_id': answer_id})
+
+
+@connection.connection_handler
+def upvote_reputation_answer(cursor, answer_id):
+    cursor.execute('''
+            UPDATE users
+            SET reputation = reputation + 10
+            FROM answer
+            WHERE answer.id = %(answer_id)s AND answer.user_id = users.id
+            ''', {'answer_id': answer_id})
+
+
+@connection.connection_handler
+def upvote_reputation_question(cursor, question_id):
+    cursor.execute(''' 
+        UPDATE users
+        SET reputation = reputation + 5
+        FROM question
+        WHERE question.id = %(question_id)s AND question.user_id = users.id
+        ''', {'question_id': question_id})
