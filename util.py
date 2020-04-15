@@ -24,6 +24,7 @@ def hash_pass(password):
 def verify_password(password, hashed_pass):
     return bcrypt.checkpw(password.encode('utf-8'), hashed_pass.encode('utf-8'))
 
+
 def check_login(username, password):
     right_user = data_handler.get_right_user(username)
     if right_user == []:
@@ -34,6 +35,7 @@ def check_login(username, password):
                 return True
             else:
                 return False
+
 
 def get_user_detail(username, user_detail):
     user_details = data_handler.get_right_user(username)
