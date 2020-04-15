@@ -1,9 +1,7 @@
 from datetime import datetime
 import bcrypt
 import data_handler
-from werkzeug.utils import secure_filename
 import os
-import data_handler
 
 
 def get_current_time():

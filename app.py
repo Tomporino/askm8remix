@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, request, url_for, flash
+from flask import Flask, render_template, redirect, request, url_for, flash, session
 import os
 import data_handler
 import util
@@ -8,6 +8,7 @@ from datetime import date
 app = Flask(__name__)
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 app.config['UPLOAD_FOLDER'] = data_handler.UPLOAD_FOLDER
+
 
 @app.route('/')
 def index():
@@ -37,7 +38,7 @@ def question(question_id):
             'question_id': question_id,
             'message': request.form['answer_message'],
             'image': None,
-            'user_id':session.get('id')
+            'user_id': session.get('id')
         }
         data_handler.add_answer(user_answer)
         return redirect(request.url)
@@ -171,7 +172,6 @@ def edit_comment(comment_id):
 
 @app.route('/comment/<comment_id>/delete')
 def delete_comment(comment_id):
-
     comment = data_handler.get_comment_by_id(comment_id)
     data_handler.delete_comment(comment_id)
 
@@ -206,7 +206,7 @@ def register():
             'password': util.hash_pass(request.form['password']),
             'password_confirm': util.hash_pass(request.form['password_confirm']),
             'email': request.form['email'],
-            'registration_date':date.today()
+            'registration_date': date.today()
 
         }
         if error_handling.check_registration(user_data):
