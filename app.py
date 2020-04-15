@@ -33,7 +33,8 @@ def question(question_id):
             'vote_number': 0,
             'question_id': question_id,
             'message': request.form['answer_message'],
-            'image': None
+            'image': None,
+            'user_id':session.get('id')
         }
         data_handler.add_answer(user_answer)
         return redirect(request.url)
@@ -52,7 +53,8 @@ def add_question():
             'vote_number': 0,
             'title': request.form['title'],
             'message': request.form['message'],
-            'image': None
+            'image': None,
+            'user_id': session.get('id')
         }
         question_id = data_handler.add_question(user_question)
         if request.form['tag-selector'] != 'None':
@@ -108,7 +110,8 @@ def add_comment_to_answer(answer_id):
             'answer_id': answer_id,
             'message': request.form['answer_comment'],
             'submission_time': util.get_current_time(),
-            'edited_count': 0
+            'edited_count': 0,
+            'user_id': session.get('id')
         }
         data_handler.add_comment(answer_comment)
         return redirect(url_for('question', question_id=answer['question_id']))
@@ -151,6 +154,7 @@ def edit_comment(comment_id):
 
 @app.route('/comment/<comment_id>/delete')
 def delete_comment(comment_id):
+
     comment = data_handler.get_comment_by_id(comment_id)
     data_handler.delete_comment(comment_id)
 
