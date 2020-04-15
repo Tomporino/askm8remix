@@ -212,7 +212,12 @@ def login():
 
     return render_template('login.html', wrong_login=wrong_login)
 
-
+@app.route('/logut')
+def logout():
+    session.pop('username', None)
+    session.pop('id', None)
+    session.pop('email', None)
+    return redirect('/')
 
 
 if __name__ == '__main__':
