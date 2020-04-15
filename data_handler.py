@@ -255,7 +255,7 @@ def save_user(cursor, user_data):
 @connection.connection_handler
 def get_users(cursor):
     cursor.execute('''
-            SELECT username, email
+            SELECT *
             FROM users
             ''')
     return cursor.fetchall()
