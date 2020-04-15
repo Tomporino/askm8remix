@@ -2,6 +2,7 @@ from flask import Flask, render_template, redirect, request, url_for, session
 import data_handler
 import util
 import error_handling
+from datetime import date
 
 app = Flask(__name__)
 app.secret_key = b'|\xbc\x93\xc0:&EXh5\xd1\xf5)|\x10N'
@@ -188,7 +189,9 @@ def register():
             'username': request.form['username'],
             'password': util.hash_pass(request.form['password']),
             'password_confirm': util.hash_pass(request.form['password_confirm']),
-            'email': request.form['email']
+            'email': request.form['email'],
+            'registration_date':date.today()
+
         }
         if error_handling.check_registration(user_data):
             data_handler.save_user(user_data)

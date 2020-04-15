@@ -4,6 +4,10 @@
         <div id="wrong-login">
             <h3>Wrong username or password, try again.</h3>
         </div>
+    {% else %}
+        <div id="login-text">
+            <h3>Login details:</h3>
+        </div>
     {% endif %}
     <div class="login">
         <form method="post" name="login-details">
@@ -11,5 +15,8 @@
             <input type="password" name="login-password" placeholder="Your password">
             <button type="submit">Go</button>
         </form>
+    </div>
+    <div id="registration-link">
+        <a href="{{ url_for('register') }}">Click here to register.</a>
     </div>
 {% endblock %}

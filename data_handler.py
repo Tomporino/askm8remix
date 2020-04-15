@@ -247,8 +247,8 @@ def delete_answer(cursor, answer_id):
 @connection.connection_handler
 def save_user(cursor, user_data):
     cursor.execute('''
-        INSERT INTO users (username, password, email)
-        VALUES (%(username)s, %(password)s, %(email)s)
+        INSERT INTO users (username, password, email, registration_date)
+        VALUES (%(username)s, %(password)s, %(email)s, %(registration_date)s)
     ''', user_data)
 
 
