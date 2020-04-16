@@ -283,6 +283,15 @@ def accepted(answer_id):
     return redirect(url_for('question', question_id=answer['question_id']))
 
 
+@app.route('/questions/<answer_id>/unaccepted')
+def unaccepted(answer_id):
+    answer = data_handler.get_selected_answer(answer_id)
+    data_handler.unaccept_answer(answer_id)
+    data_handler.unaccept_reputation(answer_id)
+
+    return redirect(url_for('question', question_id=answer['question_id']))
+
+
 if __name__ == '__main__':
     app.run(
         debug=True
