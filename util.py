@@ -48,5 +48,7 @@ def get_user_detail(username, user_detail):
         return i[user_detail]
 
 
-
+def get_id_by_name(username):
+    userdata = data_handler.get_user_by_name(username)
+    return userdata['id']
 

@@ -288,71 +288,7 @@ hr {
     text-align: center;
 }
 
-/*#answer_form {*/
-/*    border-radius: 5px;*/
-/*}*/
+/* user_page.html */
 
-/*.q_answer {*/
-
-/*    border-radius: 5px;*/
-/*    padding: 10px;*/
-/*    display: grid;*/
-/*    grid-template-rows: 1fr;*/
-/*    grid-row-gap: 1fr;*/
-
-/*}*/
-
-/*.answers {*/
-/*    border-radius: 5px;*/
-/*    width: 45%;*/
-/*    box-shadow: 0px 10px 25px 15px;*/
-/*}*/
-
-/*.q_answer p {*/
-/*    color: #AAAAAA;*/
-/*}*/
-
-/*.q_answer h4, h5{*/
-/*    color: #F4B350;*/
-/*}*/
-
-/*.answer_comment {*/
-/*    border-radius: 5px;*/
-/*    width: 34%;*/
-/*    padding: 10px*/
-/*}*/
-
-/*.answer_comment h3 {*/
-/*    color: #F4B350;*/
-/*}*/
-
-/*.answer_comment_form {*/
-/*    border-radius: 5px;*/
-/*}*/
-
-/*.q_answ_comm {*/
-/*    margin-left: 40px;*/
-
-/*}*/
-
-/*.comment_button {*/
-/*    display: grid;*/
-/*    grid-template-columns: 0fr 0fr 8fr 6fr;*/
-
-/*    text-align: center;*/
-/*}*/
-
-/*.answer_comment_form {*/
-/*    padding: 10px;*/
-/*}*/
-
-/*.answer-message-part {*/
-/*    border-radius: 8px;*/
-/*    padding: 5px;*/
-/*}*/
-
-/*.answer-comment-part {*/
-/*    border-radius: 8px;*/
-/*}*/
 
 
