@@ -327,3 +327,4 @@ def accepted_answer_reputation(cursor, answer_id):
             FROM answer
             WHERE answer.id = %(answer_id)s AND answer.user_id = users.id
             ''', {'answer_id':answer_id})
+
