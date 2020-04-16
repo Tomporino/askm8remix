@@ -361,3 +361,22 @@ def search_user_friends(cursor, user_id):
             WHERE user_id = %(user_id)s
             ''', {'user_id': user_id})
     return cursor.fetchall()
+
+
+@connection.connection_handler
+def unaccept_answer(cursor, answer_id):
+    cursor.execute('''
+            UPDATE answer
+            SET accepted = FALSE 
+            WHERE id = %(answer_id)s
+            ''', {'answer_id':answer_id})
+
+
+@connection.connection_handler
+def unaccept_reputation(cursor, answer_id):
+    cursor.execute('''
+            UPDATE users
+            SET reputation = reputation - 15
+            FROM answer
+            WHERE answer.id = %(answer_id)s AND answer.user_id = users.id
+            ''', {'answer_id':answer_id})
