@@ -279,6 +279,15 @@ hr {
 #accpeted-icon {
     margin-right: 8px;
 }
+
+/* add_friend.html */
+
+#friend {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 3fr;
+    text-align: center;
+}
+
 /*#answer_form {*/
 /*    border-radius: 5px;*/
 /*}*/

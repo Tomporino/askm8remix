@@ -10,7 +10,11 @@
         </div>
         <div class="search_result">
             {% for friend in search_result %}
-                <p>{{ friend.username }}</p>
+                <div id="friend">
+                    <div><a href="{{ url_for('user_page', username=friend.username) }}"><p>{{ friend.username }}</p></a></div>
+                    <div><p>{{ friend.email }}</p></div>
+                    <div><a href="{{ url_for('add_friend', friend_id=friend.id) }}">Add Friend</a></div>
+                </div>
             {% endfor %}
         </div>
     </div>
