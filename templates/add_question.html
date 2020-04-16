@@ -9,7 +9,7 @@
         {% if session %}
             <div>
                 <div class="add_question">
-                    <form method="post" action="{{ url_for('add_question') }}">
+                    <form method="post" enctype="multipart/form-data" action="{{ url_for('add_question') }}">
 
                         <div id="title">
                             <input name="title" type="text" placeholder="Title" required>
