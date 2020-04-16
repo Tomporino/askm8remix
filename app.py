@@ -239,9 +239,9 @@ def login():
 
 @app.route('/logut')
 def logout():
-    session.pop('username', None)
-    session.pop('id', None)
-    session.pop('email', None)
+    session_keys = [key for key in session]
+    for key in session_keys:
+        session.pop(key, None)
     return redirect('/')
 
 
@@ -256,7 +256,8 @@ def voteup_answer(answer_id):
 @app.route('/user-page/<username>')
 def user_page(username):
     user_info = data_handler.get_user_by_name(username)
-    return render_template('user_page.html', user_info=user_info)
+    friends = data_handler.search_friends(session['id'])
+    return render_template('user_page.html', user_info=user_info, friends=friends)
 
 
 @app.route('/add-friend', methods=['POST', 'GET'])
