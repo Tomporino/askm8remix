@@ -274,6 +274,10 @@ hr {
 #answ_mssg p {
     font-size: 1.5em;
 }
+
+#accpeted-icon {
+    margin-right: 8px;
+}
 /*#answer_form {*/
 /*    border-radius: 5px;*/
 /*}*/
