@@ -256,11 +256,11 @@ def voteup_answer(answer_id):
 @app.route('/user-page/<username>')
 def user_page(username):
     user_info = data_handler.get_user_by_name(username)
-    friends = data_handler.search_friends(session['id'])
+    friends = data_handler.search_user_friends(session['id'])
     return render_template('user_page.html', user_info=user_info, friends=friends)
 
 
-@app.route('/add-friend', methods=['POST', 'GET'])
+@app.route('/search-user', methods=['POST', 'GET'])
 def search_user():
     if request.method == 'POST':
         search_result = data_handler.search_friends(request.form['search_user'])

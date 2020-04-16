@@ -353,7 +353,7 @@ def set_friends(cursor, user_id, friend_id):
 
 
 @connection.connection_handler
-def search_friends(cursor, user_id):
+def search_user_friends(cursor, user_id):
     cursor.execute('''
             SELECT friends.friend_id, users.username
             FROM friends
@@ -363,6 +363,7 @@ def search_friends(cursor, user_id):
     return cursor.fetchall()
 
 
+@connection.connection_handler
 def unaccept_answer(cursor, answer_id):
     cursor.execute('''
             UPDATE answer
