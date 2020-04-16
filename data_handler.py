@@ -326,5 +326,6 @@ def accepted_answer_reputation(cursor, answer_id):
             SET reputation = reputation + 15
             FROM answer
             WHERE answer.id = %(answer_id)s AND answer.user_id = users.id
+
             ''', {'answer_id':answer_id})
 
