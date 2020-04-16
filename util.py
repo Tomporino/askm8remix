@@ -1,6 +1,7 @@
 from datetime import datetime
 import bcrypt
 import data_handler
+import os
 
 
 def get_current_time():
@@ -14,6 +15,10 @@ def get_valid_questions(questions, search_phrase, key):
                 if word.lower() == search_phrase.lower():
                     question[key] = question[key].replace(word,
                                                           '<span id="search_phrase">' + word + '</span>')
+
+
+def valid_filename(filename):
+    return os.path.splitext(filename)[1] in data_handler.ALLOWED_EXTENSIONS
 
 
 def hash_pass(password):

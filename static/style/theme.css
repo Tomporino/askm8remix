@@ -65,6 +65,7 @@ i {
 }
 
 hr {
+    border: 2px solid #E7903C;
     margin-left: 24px;
 }
 
@@ -221,9 +222,9 @@ hr {
 }
 
 #answer {
-    -moz-box-shadow:    inset 0 0 10px #000000;
+    -moz-box-shadow: inset 0 0 10px #000000;
     -webkit-box-shadow: inset 0 0 10px #000000;
-    box-shadow:         inset 0 0 10px #000000;
+    box-shadow: inset 0 0 10px #000000;
     padding: 10px;
     border-radius: 5px;
 }
