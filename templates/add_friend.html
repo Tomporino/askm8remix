@@ -1,0 +1,20 @@
+{% extends 'layout.html' %}
+{% block content %}
+    {% if session %}
+    <div class="add_friend">
+        <div id="search_users">
+            <form method="post">
+                <input name="search_user" placeholder="Search User">
+                <button type="submit">Search</button>
+            </form>
+        </div>
+        <div class="search_result">
+            {% for friend in search_result %}
+                <p>{{ friend.username }}</p>
+            {% endfor %}
+        </div>
+    </div>
+    {% else %}
+        <p>Please <a href="{{ url_for('login') }}">sign in</a> or <a href="{{ url_for('register') }}">sign up</a>!</p>
+    {% endif %}
+{% endblock %}

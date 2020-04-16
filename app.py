@@ -243,6 +243,14 @@ def user_page(username):
     return render_template('user_page.html', user_info=user_info)
 
 
+@app.route('/add-friend', methods=['POST', 'GET'])
+def add_friend():
+    if request.method == 'POST':
+        search_result = data_handler.search_friends(request.form['search_user'])
+        return render_template('add_friend.html', search_result=search_result)
+    return render_template('add_friend.html')
+
+
 if __name__ == '__main__':
     app.run(
         debug=True

@@ -308,3 +308,13 @@ def upvote_reputation_question(cursor, question_id):
         FROM question
         WHERE question.id = %(question_id)s AND question.user_id = users.id
         ''', {'question_id': question_id})
+
+
+@connection.connection_handler
+def search_friends(cursor, search_user):
+    cursor. execute('''
+        SELECT id, username, email
+        FROM users
+        WHERE username LIKE %(username)s        
+        ''', {'username': f'%{search_user}%'})
+    return cursor.fetchall()
