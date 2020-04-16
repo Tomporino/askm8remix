@@ -3,34 +3,48 @@
     {% if session %}
         <div class="user_page">
             <div class="user_data">
-                <div><h1> {{ user_info.username }} </h1></div>
-                <div id="subdata">
-                    <div><p> {{ user_info.email }} </p></div>
-                    <div><p>{{ user_info.registration_date }}</p></div>
-                    <div><p>{{ user_info.reputation }}</p></div>
+
+                <div class="q_main">
+                    <div id="username">
+                        <h1> {{ user_info.username }} </h1>
+                    </div>
+
+
+                    <div class="sub_data">
+                        <div><p> {{ user_info.email }} </p></div>
+                        <div><p>{{ user_info.registration_date }}</p></div>
+                        <div><p>Reputation {{ user_info.reputation }}</p></div>
+                    </div>
+
                 </div>
+
+                <hr id="hr">
 
             </div>
             {% if session.id != user_info.id %}
+
                 <div class="friends">
                     <a href="{{ url_for('add_friend', friend_id=user_info.id) }}">Add as Friend</a>
                 </div>
                 {% for friend in friends %}
-                <div id="friend">
-                    <a href="{{ url_for('user_page', username=friend.username) }}">{{ friend.username }}</a>
-                </div>
+                    <div id="friend">
+                        <a href="{{ url_for('user_page', username=friend.username) }}">{{ friend.username }}</a>
+                    </div>
                 {% endfor %}
+                </div>
             {% else %}
                 <div class="friends">
                     <a href="{{ url_for('search_user') }}">Add a new Friend</a>
                 </div>
+                <div class="q_main">
                 {% for friend in friends %}
-                <div id="friend">
-                    <a href="{{ url_for('user_page', username=friend.username) }}">{{ friend.username }}</a>
-                </div>
+                    <div id="friend">
+                        <h4><a href="{{ url_for('user_page', username=friend.username) }}">{{ friend.username }}</a></h4>
+                        <h4 id="friend_email">{{ friend.get('email') }}</h4>
+                    </div>
                 {% endfor %}
             {% endif %}
-        </div>
+            </div>
     {% else %}
         <p>Please <a href="{{ url_for('login') }}">sign in</a> or <a href="{{ url_for('register') }}">sign up</a>!</p>
     {% endif %}
