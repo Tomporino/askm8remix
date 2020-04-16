@@ -249,11 +249,17 @@ def user_page(username):
 
 
 @app.route('/add-friend', methods=['POST', 'GET'])
-def add_friend():
+def search_user():
     if request.method == 'POST':
         search_result = data_handler.search_friends(request.form['search_user'])
         return render_template('add_friend.html', search_result=search_result)
     return render_template('add_friend.html')
+
+
+@app.route('/add-friend/<friend_id>')
+def add_friend(friend_id):
+    data_handler.set_friends(session['id'], friend_id)
+    return render_template('add_friend.html', message='Friend Added')
 
 
 @app.route('/questions/<answer_id>/accepted')

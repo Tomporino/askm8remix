@@ -315,9 +315,10 @@ def search_friends(cursor, search_user):
     cursor. execute('''
         SELECT id, username, email
         FROM users
-        WHERE username LIKE %(username)s        
-        ''', {'username': f'%{search_user}%'})
+        WHERE username LIKE %(search_user)s OR email like %(search_user)s        
+        ''', {'search_user': f'%{search_user}%'})
     return cursor.fetchall()
+
 
 @connection.connection_handler
 def accept_answer(cursor, answer_id):
@@ -358,3 +359,11 @@ def get_answer_user(cursor, question_id):
             WHERE answer.question_id = %(question_id)s AND answer.user_id = users.id
             ''', {'question_id':question_id})
     return cursor.fetchone()
+
+
+@connection.connection_handler
+def set_friends(cursor, user_id, friend_id):
+    cursor.execute('''
+            INSERT INTO friends (user_id, friend_id)
+            VALUES (%(user_id)s, %(friend_id)s)
+            ''', {'user_id': user_id, 'friend_id': friend_id})
