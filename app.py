@@ -273,7 +273,7 @@ def search_user():
 @app.route('/add-friend/<friend_id>')
 def add_friend(friend_id):
     data_handler.set_friends(session['id'], friend_id)
-    return render_template('add_friend.html', message='Friend Added')
+    return redirect(url_for('user_page', username=session['username']))
 
 
 @app.route('/questions/<answer_id>/accepted')

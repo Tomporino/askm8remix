@@ -2,11 +2,6 @@
 {% block content %}
     {% if session %}
     <div class="add_friend">
-        {% if message %}
-            <div class="message">
-                <h1>{{ message }}</h1>
-            </div>
-        {% endif %}
         <div id="search_users">
             <form method="post">
                 <input name="search_user" placeholder="Search User">
@@ -16,7 +11,7 @@
         <div class="search_result">
             {% for friend in search_result %}
                 <div id="friend">
-                    <div><p>{{ friend.username }}</p></div>
+                    <div><a href="{{ url_for('user_page', username=friend.username) }}"><p>{{ friend.username }}</p></a></div>
                     <div><p>{{ friend.email }}</p></div>
                     <div><a href="{{ url_for('add_friend', friend_id=friend.id) }}">Add Friend</a></div>
                 </div>
