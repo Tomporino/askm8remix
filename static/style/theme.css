@@ -285,9 +285,17 @@ hr {
 #friend {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 3fr;
-    text-align: center;
+
 }
 
+
+.friends{
+    padding-bottom: 15px;
+}
+
+#friend_email{
+    color: #F4B350
+}
 /* user_page.html */
 
 
