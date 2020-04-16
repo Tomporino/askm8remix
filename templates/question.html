@@ -11,7 +11,6 @@
                         <div><p>{{ question.submission_time.strftime('%Y-%m-%d ') }}</p></div>
                         <div><p>{{ question.view_number }}</p></div>
                         <div><p>{{ question.vote_number }}</p></div>
-                        <div><p>{{ question_user.username }}</p></div>
                     </div>
                     <div class="question_buttons">
                         {% if session %}
@@ -49,7 +48,6 @@
                                         <div class="sub_data">
                                             <div><p>{{ answer.submission_time.strftime('%Y-%m-%d ') }}</p></div>
                                             <div><p>{{ answer.vote_number }}</p></div>
-                                            <div><p>{{ answer_user.username }}</p></div>
                                             <div></div>
                                         </div>
                                         <div class="answer_buttons">

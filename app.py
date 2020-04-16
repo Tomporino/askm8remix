@@ -28,8 +28,6 @@ def home():
 @app.route('/question/<question_id>', methods=['POST', 'GET'])
 def question(question_id):
     comments = data_handler.get_comments()
-    question_user = data_handler.get_question_user(question_id)
-    answer_user = data_handler.get_answer_user(question_id)
 
     if request.method == 'POST':
         user_answer = {
@@ -45,8 +43,7 @@ def question(question_id):
     data_handler.view_counter(question_id)
     question = data_handler.get_selected_question(question_id)
     answers = data_handler.get_answers_for_question(question_id)
-    return render_template('question.html', question=question, answers=answers, comments=comments,
-                           question_user=question_user, answer_user=answer_user)
+    return render_template('question.html', question=question, answers=answers, comments=comments)
 
 
 @app.route('/add-question', methods=['GET', 'POST'])
