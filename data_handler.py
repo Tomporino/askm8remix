@@ -363,6 +363,7 @@ def search_friends(cursor, user_id):
     return cursor.fetchall()
 
 
+@connection.connection_handler
 def unaccept_answer(cursor, answer_id):
     cursor.execute('''
             UPDATE answer
