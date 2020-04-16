@@ -316,7 +316,7 @@ def upvote_reputation_question(cursor, question_id):
 
 @connection.connection_handler
 def search_friends(cursor, search_user):
-    cursor. execute('''
+    cursor.execute('''
         SELECT id, username, email
         FROM users
         WHERE username LIKE %(search_user)s OR email like %(search_user)s        
@@ -330,7 +330,7 @@ def accept_answer(cursor, answer_id):
             UPDATE answer
             SET accepted = TRUE 
             WHERE id = %(answer_id)s
-            ''', {'answer_id':answer_id})
+            ''', {'answer_id': answer_id})
 
 
 @connection.connection_handler
@@ -341,7 +341,7 @@ def accepted_answer_reputation(cursor, answer_id):
             FROM answer
             WHERE answer.id = %(answer_id)s AND answer.user_id = users.id
 
-            ''', {'answer_id':answer_id})
+            ''', {'answer_id': answer_id})
 
 
 @connection.connection_handler
