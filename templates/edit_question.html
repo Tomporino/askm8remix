@@ -1,19 +1,54 @@
 {% extends 'layout.html' %}
 
+{% block css %}
+    <link rel="stylesheet" type="text/css" href={{ url_for('static', filename='style/theme_add_question.css') }}>
+{% endblock %}
+
 {% block content %}
-    <div class="edit_page">
-        <form method="post">
-            <input name="title" value="{{ question.title }}">
-                <select name="tag_selector">
-                    <option name="None" value=None>None</option>
-                    {% for tag in tags %}
-                        <option name="{{ tag.name }}" value="{{ tag.id }}">{{ tag.name }}</option>
-                    {% endfor %}
-                </select>
-            <textarea name="message">
-                {{ question.message }}
-            </textarea>
-            <button type="submit">Submit</button>
-        </form>
-    </div>
+    <div class="content">
+        {% if session %}
+            <div>
+                <div class="add_question">
+                    <form method="post" enctype="multipart/form-data" action="{{ url_for('add_question') }}">
+
+                        <div id="title">
+                            <input name="title" type="text" value="{{ question.title }}" required>
+                        </div>
+
+                        <hr id="hr">
+
+                        <div id="add-question">
+                            <div id="text">
+                                <textarea name="message"  rows="10" required>{{ question.message }}</textarea>
+                            </div>
+
+                            <div>
+                                <div id="tag-selector">
+                                    <label for="tag-selector">Select tag</label>
+                                    <select name="tag-selector">
+                                        <option name="None" value=None>None</option>
+                                        {% for tag in tags %}
+                                            <option name="{{ tag.name }}" value="{{ tag.id }}">{{ tag.name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+
+{#                                <div id="file">#}
+{#                                    <input name="file" type="file">#}
+{#                                </div>#}
+
+                                <div id="submit">
+                                    <button name="submit" type="submit">Submit</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div></div>
+            </div>
+        {% else %}
+            <p>Please <a href="{{ url_for('login') }}">sign in</a> or <a href="{{ url_for('register') }}">sign up</a>!
+            </p>
+        {% endif %}
 {% endblock %}
