@@ -266,6 +266,16 @@ def get_users(cursor):
 
 
 @connection.connection_handler
+def get_user_by_name(cursor, username):
+    cursor.execute('''
+            SELECT *
+            FROM users
+            WHERE username=%(username)s;
+            ''', {'username': username})
+    return cursor.fetchone()
+
+
+@connection.connection_handler
 def get_right_user(cursor, userdata):
     cursor.execute('''
         SELECT id,username,password,email
@@ -302,3 +312,53 @@ def upvote_reputation_question(cursor, question_id):
         FROM question
         WHERE question.id = %(question_id)s AND question.user_id = users.id
         ''', {'question_id': question_id})
+
+
+@connection.connection_handler
+def search_friends(cursor, search_user):
+    cursor. execute('''
+        SELECT id, username, email
+        FROM users
+        WHERE username LIKE %(username)s        
+        ''', {'username': f'%{search_user}%'})
+    return cursor.fetchall()
+
+@connection.connection_handler
+def accept_answer(cursor, answer_id):
+    cursor.execute('''
+            UPDATE answer
+            SET accepted = TRUE 
+            WHERE id = %(answer_id)s
+            ''', {'answer_id':answer_id})
+
+
+@connection.connection_handler
+def accepted_answer_reputation(cursor, answer_id):
+    cursor.execute('''
+            UPDATE users
+            SET reputation = reputation + 15
+            FROM answer
+            WHERE answer.id = %(answer_id)s AND answer.user_id = users.id
+            ''', {'answer_id':answer_id})
+
+
+@connection.connection_handler
+def get_question_user(cursor, question_id):
+    cursor.execute('''
+            SELECT * 
+            FROM users
+            INNER JOIN question ON question.user_id=users.id
+            WHERE question.id = %(question_id)s AND question.user_id = users.id 
+            ''', {'question_id':question_id})
+    return cursor.fetchone()
+
+
+@connection.connection_handler
+def get_answer_user(cursor, question_id):
+    cursor.execute('''
+            SELECT * 
+            FROM users
+            INNER JOIN answer ON answer.user_id=users.id
+            WHERE answer.question_id = %(question_id)s AND answer.user_id = users.id
+            ''', {'question_id':question_id})
+    return cursor.fetchone()

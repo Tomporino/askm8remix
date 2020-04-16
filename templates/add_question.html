@@ -6,15 +6,16 @@
 
 {% block content %}
     <div class="content">
-        <div>
-            <div class="add_question">
-                <form method="post" action="{{ url_for('add_question') }}" enctype=multipart/form-data>
+        {% if session %}
+            <div>
+                <div class="add_question">
+                    <form method="post" action="{{ url_for('add_question') }}">
 
                     <div id="title">
                         <input name="title" type="text" placeholder="Title" required>
                     </div>
 
-                    <hr id="hr">
+                        <hr id="hr">
 
                     <div id="add-question">
                         <div id="text">
@@ -30,19 +31,32 @@
                                     {% endfor %}
                                 </select>
                             </div>
+                            <div>
+                                <div id="tag-selector">
+                                    <label for="tag-selector">Select tag</label>
+                                    <select name="tag-selector">
+                                        <option name="None" value=None>None</option>
+                                        {% for tag in tags %}
+                                            <option name="{{ tag.name }}" value="{{ tag.id }}">{{ tag.name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
 
                             <div id="file">
                                 <input name="file" type="file">
                             </div>
 
-                            <div id="submit">
-                                <button name="submit" type="submit">Submit</button>
+                                <div id="submit">
+                                    <button name="submit" type="submit">Submit</button>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
+            <div></div>
         </div>
-        <div></div>
-    </div>
+    {% else %}
+        <p>Please <a href="{{ url_for('login') }}">sign in</a> or <a href="{{ url_for('register') }}">sign up</a>!</p>
+    {% endif %}
 {% endblock %}

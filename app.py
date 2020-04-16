@@ -10,6 +10,7 @@ app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 app.config['UPLOAD_FOLDER'] = data_handler.UPLOAD_FOLDER
 
 
+
 @app.route('/')
 def index():
     questions = data_handler.get_top_questions(5)
@@ -30,6 +31,8 @@ def home():
 @app.route('/question/<question_id>', methods=['POST', 'GET'])
 def question(question_id):
     comments = data_handler.get_comments()
+    question_user = data_handler.get_question_user(question_id)
+    answer_user = data_handler.get_answer_user(question_id)
 
     if request.method == 'POST':
         user_answer = {
@@ -45,7 +48,8 @@ def question(question_id):
     data_handler.view_counter(question_id)
     question = data_handler.get_selected_question(question_id)
     answers = data_handler.get_answers_for_question(question_id)
-    return render_template('question.html', question=question, answers=answers, comments=comments)
+    return render_template('question.html', question=question, answers=answers, comments=comments,
+                           question_user=question_user, answer_user=answer_user)
 
 
 @app.route('/add-question', methods=['GET', 'POST'])
@@ -249,6 +253,29 @@ def voteup_answer(answer_id):
     answer = data_handler.get_selected_answer(answer_id)
     data_handler.upvote_answer(answer_id)
     data_handler.upvote_reputation_answer(answer_id)
+    return redirect(url_for('question', question_id=answer['question_id']))
+
+
+@app.route('/user-page/<username>')
+def user_page(username):
+    user_info = data_handler.get_user_by_name(username)
+    return render_template('user_page.html', user_info=user_info)
+
+
+@app.route('/add-friend', methods=['POST', 'GET'])
+def add_friend():
+    if request.method == 'POST':
+        search_result = data_handler.search_friends(request.form['search_user'])
+        return render_template('add_friend.html', search_result=search_result)
+    return render_template('add_friend.html')
+
+
+@app.route('/questions/<answer_id>/accepted')
+def accepted(answer_id):
+    answer = data_handler.get_selected_answer(answer_id)
+    data_handler.accept_answer(answer_id)
+    data_handler.accepted_answer_reputation(answer_id)
+
     return redirect(url_for('question', question_id=answer['question_id']))
 
 
