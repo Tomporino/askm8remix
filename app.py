@@ -10,7 +10,6 @@ app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 app.config['UPLOAD_FOLDER'] = data_handler.UPLOAD_FOLDER
 
 
-
 @app.route('/')
 def index():
     questions = data_handler.get_top_questions(5)
@@ -62,12 +61,12 @@ def add_question():
             'user_id': session.get('id')
         }
 
-        if 'file' not in request.files:
-            flash('No image part')
-        else:
-            file = request.files['file']
-            user_question['image'] = file.filename
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], file.filename))
+        # if 'file' not in request.files:
+        #     flash('No image part')
+        # else:
+        #     file = request.files['file']
+        #     user_question['image'] = file.filename
+        #     file.save(os.path.join(app.config['UPLOAD_FOLDER'], file.filename))
 
         question_id = data_handler.add_question(user_question)
 
