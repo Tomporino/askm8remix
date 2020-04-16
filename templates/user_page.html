@@ -3,8 +3,13 @@
     {% if session %}
         <div class="user_page">
             <div class="user_data">
-                <h1> {{ user_info.username }} </h1>
-                <p> {{ user_info.email }} </p>
+                <div><h1> {{ user_info.username }} </h1></div>
+                <div id="subdata">
+                    <div><p> {{ user_info.email }} </p></div>
+                    <div><p>{{ user_info.registration_date }}</p></div>
+                    <div><p>{{ user_info.reputation }}</p></div>
+                </div>
+
             </div>
             {% if session.id != user_info.id %}
                 <div class="friends">
