@@ -356,7 +356,7 @@ def set_friends(cursor, user_id, friend_id):
 @connection.connection_handler
 def search_user_friends(cursor, user_id):
     cursor.execute('''
-            SELECT friends.friend_id, users.username
+            SELECT friends.friend_id, users.username, users.email, users.reputation
             FROM friends
             INNER JOIN users ON friends.friend_id = users.id
             WHERE user_id = %(user_id)s
