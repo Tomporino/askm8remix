@@ -1,0 +1,13 @@
+{% extends 'layout.html' %}
+{% block content %}
+    {% if session.id == user_info.id %}
+        <div class="user_page">
+            <div class="user_data">
+                <h1> {{ user_info.username }} </h1>
+                <p> {{ user_info.email }} </p>
+            </div>
+        </div>
+    {% else %}
+        <p>Please <a href="{{ url_for('login') }}">sign in</a> or <a href="{{ url_for('register') }}">sign up</a>!</p>
+    {% endif %}
+{% endblock %}

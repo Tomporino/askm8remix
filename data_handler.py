@@ -262,6 +262,16 @@ def get_users(cursor):
 
 
 @connection.connection_handler
+def get_user_by_name(cursor, username):
+    cursor.execute('''
+            SELECT *
+            FROM users
+            WHERE username=%(username)s;
+            ''', {'username': username})
+    return cursor.fetchone()
+
+
+@connection.connection_handler
 def get_right_user(cursor, userdata):
     cursor.execute('''
         SELECT id,username,password,email
