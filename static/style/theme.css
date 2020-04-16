@@ -282,6 +282,12 @@ hr {
 
 /* add_friend.html */
 
+.friends {
+    display: grid;
+    grid-template-rows: 1fr;
+    text-align: center;
+}
+
 #friend {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 3fr;
@@ -296,7 +302,14 @@ hr {
 #friend_email{
     color: #F4B350
 }
+#add_friend {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    text-align: center;
+}
+
 /* user_page.html */
+
 
 
 

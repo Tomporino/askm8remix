@@ -24,8 +24,7 @@
             {% if session.id != user_info.id %}
 
                 <div class="friends">
-                    <a href="{{ url_for('add_friend', friend_id=user_info.id) }}">Add as Friend</a>
-                </div>
+                   <div>id="add_friend"><a href="{{ url_for('add_friend', friend_id=user_info.id) }}">Add as Friend</a></div>
                 {% for friend in friends %}
                     <div id="friend">
                         <a href="{{ url_for('user_page', username=friend.username) }}">{{ friend.username }}</a>
@@ -34,7 +33,7 @@
                 </div>
             {% else %}
                 <div class="friends">
-                    <a href="{{ url_for('search_user') }}">Add a new Friend</a>
+                    <div id="add_friend"><a href="{{ url_for('search_user') }}">Add a new Friend</a></div>
                 </div>
                 <div class="q_main">
                 {% for friend in friends %}
