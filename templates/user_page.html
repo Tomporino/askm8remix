@@ -14,6 +14,11 @@
                 <div class="friends">
                     <a href="{{ url_for('search_user') }}">Add a new Friend</a>
                 </div>
+                {% for friend in friends %}
+                <div id="friend">
+                    <a href="{{ url_for('user_page', username=friend.username) }}">{{ friend.username }}</a>
+                </div>
+                {% endfor %}
             {% endif %}
         </div>
     {% else %}
