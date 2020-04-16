@@ -243,6 +243,14 @@ def user_page(username):
     return render_template('user_page.html', user_info=user_info)
 
 
+@app.route('/questions/<answer_id>/accepted')
+def accepted(answer_id):
+    answer = data_handler.get_selected_answer(answer_id)
+    data_handler.accept_answer(answer_id)
+    data_handler.accepted_answer_reputation(answer_id)
+
+    return redirect(url_for('question', question_id=answer['question_id']))
+
 if __name__ == '__main__':
     app.run(
         debug=True

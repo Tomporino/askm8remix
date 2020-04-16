@@ -36,8 +36,16 @@
                             {% for answer in answers %}
                                 <div id="answer">
                                     <div id="answer_main">
-                                        <div id="answ_mssg"><p><i class="glyphicon glyphicon-chevron-right"></i> {{ answer.message }}
-                                        </p></div>
+                                        {% if answer.accepted == True %}
+                                            <div id="answ_mssg"><p><i class="glyphicon glyphicon-ok"></i> {{ answer.message }}
+                                            </p></div>
+                                        {% elif session['id'] == question.user_id%}
+                                            <div id="answ_mssg"><p><a href="{{ url_for('accepted', answer_id=answer.id) }}"><i class="glyphicon glyphicon-chevron-right"></i></a> {{ answer.message }}
+                                            </p></div>
+                                        {% else %}
+                                            <div id="answ_mssg"><p><i class="glyphicon glyphicon-chevron-right"></i> {{ answer.message }}
+                                            </p></div>
+                                        {% endif %}
                                         <div class="sub_data"><p>{{ answer.submission_time.strftime('%Y-%m-%d ') }}</p>
                                         </div>
                                         <div class="sub_data"><p>{{ answer.vote_number }}</p></div>

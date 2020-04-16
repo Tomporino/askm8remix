@@ -308,3 +308,22 @@ def upvote_reputation_question(cursor, question_id):
         FROM question
         WHERE question.id = %(question_id)s AND question.user_id = users.id
         ''', {'question_id': question_id})
+
+
+@connection.connection_handler
+def accept_answer(cursor, answer_id):
+    cursor.execute('''
+            UPDATE answer
+            SET accepted = TRUE 
+            WHERE id = %(answer_id)s
+            ''', {'answer_id':answer_id})
+
+
+@connection.connection_handler
+def accepted_answer_reputation(cursor, answer_id):
+    cursor.execute('''
+            UPDATE users
+            SET reputation = reputation + 15
+            FROM answer
+            WHERE answer.id = %(answer_id)s AND answer.user_id = users.id
+            ''', {'answer_id':answer_id})
