@@ -1,5 +1,9 @@
 from psycopg2 import sql
 import connection
+import os
+
+UPLOAD_FOLDER = os.getenv('DATA_FILE_PATH') if 'DATA_FILE_PATH' in os.environ else 'static/images/'
+ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
 
 
 @connection.connection_handler
