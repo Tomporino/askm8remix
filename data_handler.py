@@ -327,3 +327,25 @@ def accepted_answer_reputation(cursor, answer_id):
             FROM answer
             WHERE answer.id = %(answer_id)s AND answer.user_id = users.id
             ''', {'answer_id':answer_id})
+
+
+@connection.connection_handler
+def get_question_user(cursor, question_id):
+    cursor.execute('''
+            SELECT * 
+            FROM users
+            INNER JOIN question ON question.user_id=users.id
+            WHERE question.id = %(question_id)s AND question.user_id = users.id 
+            ''', {'question_id':question_id})
+    return cursor.fetchone()
+
+
+@connection.connection_handler
+def get_answer_user(cursor, question_id):
+    cursor.execute('''
+            SELECT * 
+            FROM users
+            INNER JOIN answer ON answer.user_id=users.id
+            WHERE answer.question_id = %(question_id)s AND answer.user_id = users.id
+            ''', {'question_id':question_id})
+    return cursor.fetchone()

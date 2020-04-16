@@ -7,6 +7,7 @@ from datetime import date
 app = Flask(__name__)
 app.secret_key = b'|\xbc\x93\xc0:&EXh5\xd1\xf5)|\x10N'
 
+
 @app.route('/')
 def index():
     questions = data_handler.get_top_questions(5)
@@ -27,6 +28,8 @@ def home():
 @app.route('/question/<question_id>', methods=['POST', 'GET'])
 def question(question_id):
     comments = data_handler.get_comments()
+    question_user = data_handler.get_question_user(question_id)
+    answer_user = data_handler.get_answer_user(question_id)
 
     if request.method == 'POST':
         user_answer = {
@@ -35,14 +38,15 @@ def question(question_id):
             'question_id': question_id,
             'message': request.form['answer_message'],
             'image': None,
-            'user_id':session.get('id')
+            'user_id': session.get('id')
         }
         data_handler.add_answer(user_answer)
         return redirect(request.url)
     data_handler.view_counter(question_id)
     question = data_handler.get_selected_question(question_id)
     answers = data_handler.get_answers_for_question(question_id)
-    return render_template('question.html', question=question, answers=answers, comments=comments)
+    return render_template('question.html', question=question, answers=answers, comments=comments,
+                           question_user=question_user, answer_user=answer_user)
 
 
 @app.route('/add-question', methods=['GET', 'POST'])
@@ -81,12 +85,14 @@ def edit_question(question_id):
             'image': None
         }
         data_handler.edit_question(user_question)
-        if request.form['tag_selector'] and int(question_id) not in [tag['question_id'] for tag in data_handler.get_question_tags()]:
+        if request.form['tag_selector'] and int(question_id) not in [tag['question_id'] for tag in
+                                                                     data_handler.get_question_tags()]:
             data_handler.set_question_tag(question_id, int(request.form['tag_selector']))
         else:
             data_handler.update_question_tag(question_id, int(request.form['tag_selector']))
         return redirect(url_for('question', question_id=question_id))
-    return render_template('edit_question.html', question=data_handler.get_selected_question(question_id), tags=data_handler.get_tags())
+    return render_template('edit_question.html', question=data_handler.get_selected_question(question_id),
+                           tags=data_handler.get_tags())
 
 
 @app.route('/delete-question/<question_id>')
@@ -156,7 +162,6 @@ def edit_comment(comment_id):
 
 @app.route('/comment/<comment_id>/delete')
 def delete_comment(comment_id):
-
     comment = data_handler.get_comment_by_id(comment_id)
     data_handler.delete_comment(comment_id)
 
@@ -191,7 +196,7 @@ def register():
             'password': util.hash_pass(request.form['password']),
             'password_confirm': util.hash_pass(request.form['password_confirm']),
             'email': request.form['email'],
-            'registration_date':date.today()
+            'registration_date': date.today()
 
         }
         if error_handling.check_registration(user_data):
@@ -250,6 +255,7 @@ def accepted(answer_id):
     data_handler.accepted_answer_reputation(answer_id)
 
     return redirect(url_for('question', question_id=answer['question_id']))
+
 
 if __name__ == '__main__':
     app.run(

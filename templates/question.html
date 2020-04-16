@@ -11,7 +11,7 @@
                         <div><p>{{ question.submission_time.strftime('%Y-%m-%d ') }}</p></div>
                         <div><p>{{ question.view_number }}</p></div>
                         <div><p>{{ question.vote_number }}</p></div>
-                        <div></div>
+                        <div><p>{{ question_user.username }}</p></div>
                     </div>
                     <div class="question_buttons">
                         {% if session %}
@@ -46,9 +46,12 @@
                                             <div id="answ_mssg"><p><i class="glyphicon glyphicon-chevron-right"></i> {{ answer.message }}
                                             </p></div>
                                         {% endif %}
-                                        <div class="sub_data"><p>{{ answer.submission_time.strftime('%Y-%m-%d ') }}</p>
+                                        <div class="sub_data">
+                                            <div><p>{{ answer.submission_time.strftime('%Y-%m-%d ') }}</p></div>
+                                            <div><p>{{ answer.vote_number }}</p></div>
+                                            <div><p>{{ answer_user.username }}</p></div>
+                                            <div></div>
                                         </div>
-                                        <div class="sub_data"><p>{{ answer.vote_number }}</p></div>
                                         <div class="answer_buttons">
                                             <a href="{{ url_for('voteup_answer', answer_id=answer.id) }}"><div><i class="glyphicon glyphicon-thumbs-up"></i></div></a>
                                             <a href="{{ url_for('add_comment_to_answer', answer_id=answer.id) }}"><div><i class="glyphicon glyphicon-comment"></i></div></a>
